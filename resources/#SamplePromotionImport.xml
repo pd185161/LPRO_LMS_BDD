@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HQL_Promotion_Interface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="HQL_Promotion_Interface.xsd">
+	<Retailer Id="String">
+		<PromotionGroups>
+			<PromotionGroup ExternalGroupId="a" Name="a" Description="text" ParentExternalGroupId="a"/>
+		</PromotionGroups>
+		<Promotions OfferProviderName="a">
+			<Promotion PromotionHeaderId="a" Action="US">
+				<PromotionActiveDays StartTime="09:30:47+05:00" EndTime="09:30:47+05:00" ActiveOnSunday="true" ActiveOnMonday="true" ActiveOnTuesday="true" ActiveOnWednesday="true" ActiveOnThursday="true" ActiveOnFriday="true" ActiveOnSaturday="true"/>
+				<EnhancedPromotionActiveDays ActiveOnSunday="true" SundayStartTime="09:30:47+05:00" SundayEndTime="09:30:47+05:00" ActiveOnMonday="true" MondayStartTime="09:30:47+05:00" MondayEndTime="09:30:47+05:00" ActiveOnTuesday="true" TuesdayStartTime="09:30:47+05:00" TuesdayEndTime="09:30:47+05:00" ActiveOnWednesday="true" WednesdayStartTime="09:30:47+05:00" WednesdayEndTime="09:30:47+05:00" ActiveOnThursday="true" ThursdayStartTime="09:30:47+05:00" ThursdayEndTime="09:30:47+05:00" ActiveOnFriday="true" FridayStartTime="09:30:47+05:00" FridayEndTime="09:30:47+05:00" ActiveOnSaturday="true" SaturdayStartTime="09:30:47+05:00" SaturdayEndTime="09:30:47+05:00"/>
+				<PromotionDetails HeaderDescription="a" Status="true" TypeId="0" StartDate="1900-01-01T00:00:00Z" EndDate="1900-01-01T00:00:00Z" TargetPopulationType="2" RedemptionLimitMaximum="0" RedemptionLimitPerDay="0" RedemptionLimitPerTransaction="0" MinimumPurchaseAmount="3.141590118408203125" Remarks="a" MarkdownCategoryId="a" MarkdownCategoryLevelId="0" LimitedToHomeStoreOnly="true" SponsorSupplierId="a" SharedFundingValue="3.141590118408203125" PromotionReceiptDescription="a" AdditionalTypeId="0" ContinuityScope="1" TriggerTiming="true" DiscountAllocationFlag="true" DiscountAllocationScope="3" CouponRewardsScope="2" PromotionFundingScope="3" SharedFundingScope="2" TicketPrintingScope="2" MeanOfPaymentScope="2" ConflictScope="1" PopulationSegmentsOperator="2" PopulationLocalSegmentsOperator="1" PopulationOfflineMode="2" RequiredCoupon="true" CouponPrefix="a" CouponBusinessId="a" CouponInstanceDescription="a" DocumentId="0" SegmentationMode="0" ExternalGroupId="a" AccountingCode="a" AccountingSubCode="a" ReturnItemEligibility="127" TicketPrintingText="a" HomeStoreScope="2" RedemptionLimitScope="0" UOMLimit="3.141590118408203125" UOMLimitType="6" PromotionFlowStatus="2" ExcludeItemsWithProhibitDiscount="4096" TriggerItemsExcludedFromOtherPromotions="0" ExcludeTriggerItemsOfMarkedPromotions="0" MeanOfPaymentTenderId="0" ExternalValidationRequired="0" ExcludeRewardedItemsFromSpendConditionThreshold="4096" ConflictGroupId="4096" MemberRegistrationRequired="0" RegisteredPromotionRedemption="0" DeductRegistrationCost="1" MemberAccountId="0" MemberAccountValue="0" LabelDescription="String" LabelFormat1="1" LabelFormat2="1" ApplyPartialRewardWithOptimization="true" LevelRepetition="2" PromotionRewardWillBeDisregardedByOtherPromotions="true" DisregardRewardOfMarkedPromotions="true" MissedOffer="true" RedeemDigitalCoupon="a" DigitalCouponRequired="true" ManualPriorityValue="0" PromotionDraftStatus="2" ExcludeFromPriceCompare="true" TotalTriggerLimit="0" CalculatePromotionOnGrossPrice="true" MinimumNumberOfItems="1" MinimumNumberApplyTo="1" AllowOmniChannelCoupon="0" CalculatePromotionThresholdExcludeTax="1" ItemRedemptionConfirmationRequired="true" CalculatePromotionPostTax="true" MinimumItemPrice="0" MaximumItemPrice="0" MeanOfPaymentSharedTenderScope="0" MeanOfPaymentSharedTenderValue="3.141590118408203125" PauseFromExecutionOnStores="true" RdmConfirmationMsg="a" DefaultRedemptionLimit="1" DisregardItemMinimumPrice="false"/>
+				<Distribution>
+					<Store Id="String" StartDate="1900-01-01T00:00:00Z" EndDate="1900-01-01T00:00:00Z" Suspended="true" Action="U"/>
+				</Distribution>
+				<PromotionsLevels>
+					<PromotionsLevel Id="0" ExternalLevelRef="0">
+						<Reward RewardTemplateId="1" RewardValue="a" RewardValueType="3" LimitDiscountScope="1" LimitItemScope="0" ConnectedSegmentId="1" DisconnectedSegmentId="1" IncreaseMemberAccountId="0" LimitItemCount="0" TimingScope="0" LimitUOMScope="0" PercentLimitationScope="2" IncreaseMemberAccountType="2" ManualRewardValueScope="1" TriggerValueForIncentiveMsg="3.141590118408203125" LimitRewardAmount="3.141590118408203125" MaximumSpendForReward="3.141590118408203125" ReduceMemberAccountScope="5" ReduceMemberAccountId="0" ReduceMemberAccountValue="3.141590118408203125" MSUQuantity="0" ReduceMemberAccountValidationAppliesTo="101" ReducePriceScope="3" InjectRewardFromMAId="0" InjectRewardFromItemPrice="0" MABalanceType="101" ReduceMAByRewardValue="0" LimitRewardMAAmount="0" LimitRewardMAScope="3" LimitRewardValue="3.141590118408203125" CalculateRewardOnPurchasedAmount="0" InjectRewardFromDAId="0" RewardEnteredByCashier="0" AccumulateDiscountIntoMemberAccount="1" DiscountsAccumulatingMemberAccountId="0" CashierMaximumManualRewardSource="1" CashierMaximumManualMAId="0" CashierMaximumManualMABalanceType="100" ReduceMemberAccountValueScope="0" CalculatePromotionRewardExcludeTax="0" AddTaxAmountToRewardAmount="0" TimingMemberAccountScope="0" RewardPointsExpirationValue="0" AdditionalPointsExpirationValue="0" RewardIntoMAExpirationValue="0" IssueDigitalCoupon="a" DigitalCouponRequired="1" ManualEntryAllowed="0" DocumentType="5" DocumentId="0" DocumentValidScope="2" DocumentStartingFrom="2" DocumentValidForXDays="1" DocumentValidFrom="1957-08-13" DocumentValidTo="1957-08-13" IssueOmniChannelCoupon="0" MinimumManualMAValue="0.0010000000474974513053894" MinimumManualMABalanceType="102" TaxExecutionMethod="0" TenderIDForTax="0" CampaignLimitsScope="1" MaximumPromotionRedemptions="1" MaximumPromotionRewards="0" IssueCompensationDocumentScope="2" CompensationDocumentId="0" CompensationValidScope="2" CompensationStartingFrom="4" CompensationValidForXDays="1" CompensationValidFrom="1957-08-13" CompensationValidTo="1957-08-13" RecalculateTaxAfterPromotionDiscount="text" RewardLimitationScope="0" RewardLimitationAmount="3.141590118408203125"/>
+						<Thresholds>
+							<Threshold BucketId="0" ThresholdTypeId="5" ThresholdValue="3.141590118408203125" ThresholdSubTypeId="0"/>
+						</Thresholds>
+						<Messages>
+							<Message AttributeId="5182" AttributeValue="a"/>
+						</Messages>
+					</PromotionsLevel>
+				</PromotionsLevels>
+				<PromotionsBuckets>
+					<PromotionsBucket Id="0" Name="a" QtySize="0" QtySizeMinValue="3.141590118408203125" QtySizeMaxValue="3.141590118408203125" MinimumRequiredValue="3.141590118408203125" ThresholdAppliesTo="2" ParticipateInReward="true" IncentiveMsgAppliesTo="1" RewardCalculationStartsFromMinValue="0" AndOrOperator="true" AllocateDiscountBreakdown="true" RoundingToMultipleOf="3.141590118408203125" LimitRewardedByConditionSpend="true" BucketTriggerItemsWillBeExcludedFromOtherPromotions="true" BucketExcludeTriggerItemsOfMarkedPromotions="true" DeductTenderAmountFromQualifyingTicketSpend="true" ApplyOnGrossTenderAmount="true">
+						<BucketEntity EntityId="a" EntityType="6" EntityLevel="0" EntityValue=" " EntityOperator="=" EntityAdditionalValue="a" AndOrOperator="true" Exclude="true" MultiRewardValue="3.141590118408203125" EntityAdditionalName="a" ItemRedemptionLimit="0" EntityViewId="4096"/>
+					</PromotionsBucket>
+				</PromotionsBuckets>
+				<PromotionLoyaltySegments>
+					<PromotionLoyaltySegment SegmentId="1" Exclude="true" LineId="0" ElementType="0"/>
+				</PromotionLoyaltySegments>
+				<LinkedPromotions>
+					<LinkedPromotion LinkedPromotionId="a"/>
+				</LinkedPromotions>
+				<PromotionAttributes>
+					<Attribute Id="0" Value="a"/>
+				</PromotionAttributes>
+				<Translations>
+					<Attribute AttributeId="String">
+						<Language LanguageId="0" Value="String"/>
+					</Attribute>
+				</Translations>
+				<CheckoutGroups>
+					<CheckoutGroup CheckoutGroupId="1" Exclude="0"/>
+				</CheckoutGroups>
+				<MarketingAttributes>
+					<Channels>
+						<Channel ChannelId="0"/>
+					</Channels>
+					<MarketingProperties Title="a" Description="String" ImageLink="String" Link="String" Restrictions="String" MarketingPriority="0" SavingValue="0"/>
+				</MarketingAttributes>
+				<PromotionSchemes>
+					<PromotionScheme SchemeId="4096" SchemeTypeId="4096"/>
+				</PromotionSchemes>
+			</Promotion>
+			<Legend>
+				<PromotionActiveDays ActiveOnSunday="true" ActiveOnMonday="true" ActiveOnTuesday="true" ActiveOnWednesday="true" ActiveOnThursday="true" ActiveOnFriday="true" ActiveOnSaturday="true"/>
+				<PromotionDetails AdditionalTypeId="0" ContinuityScope="2" TriggerTiming="false" DiscountAllocationScope="4" CouponRewardsScope="2" PromotionFundingScope="3" SharedFundingScope="2" TicketPrintingScope="5" MeanOfPaymentScope="4" ConflictScope="4" PopulationSegmentsOperator="1" PopulationLocalSegmentsOperator="1" PopulationOfflineMode="1"/>
+				<Reward TimingScope="1" LimitUOMScope="1" PercentLimitationScope="0" IncreaseMemberAccountType="2" ManualRewardValueScope="1"/>
+				<PromotionsBucket ThresholdAppliesTo="102" ParticipateInReward="true" AndOrOperator="false" AllocateDiscountBreakdown="true"/>
+				<BucketEntity AndOrOperator="true" Exclude="false"/>
+			</Legend>
+		</Promotions>
+	</Retailer>
+</HQL_Promotion_Interface>

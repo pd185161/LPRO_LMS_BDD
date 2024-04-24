@@ -1,0 +1,17 @@
+2024-04-01 18:56:25,047 - API Automation -INFO - Node Value is : 7E9BBA90-E508-E56F-0A88-00C3AE1F78CF
+2024-04-01 18:56:27,327 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= MP_LMS;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:27,780 - API Automation -INFO - retrive Records from Table :Select MatrixMemberId from AppUser where UserName = 'HQL'
+2024-04-01 18:56:31,253 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= Loyalty_LMS_1;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:31,638 - API Automation -INFO - retrive Records from Table :SELECT TOP (1) [AccountId] FROM CRM_AccumulatedAccounts where MatrixMemberId = 1
+2024-04-01 18:56:35,094 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= HOST_LMS_1;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:35,491 - API Automation -INFO - retrive Records from Table :Select RetailerId from RetailerCode where MatrixMemberId = 1
+2024-04-01 18:56:38,946 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= Loyalty_LMS_1;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:39,332 - API Automation -INFO - retrive Records from Table :SELECT TOP (1) SegmentInternalKey FROM CRM_Segment where MatrixMemberId = 1 order by SegmentInternalKey desc
+2024-04-01 18:56:42,806 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= Loyalty_LMS_1;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:43,192 - API Automation -INFO - retrive Records from Table :select SegmentId from CRM_Segment where SegmentInternalKey = 2111
+2024-04-01 18:56:46,653 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= Loyalty_LMS_1;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:47,045 - API Automation -INFO - retrive Records from Table :select SegmentDescription from CRM_Segment where SegmentInternalKey = 2111
+2024-04-01 18:56:50,564 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= Loyalty_LMS_1;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:50,953 - API Automation -INFO - retrive Records from Table :select clubId from CRM_Club where ClubInternalKey IN (select ClubInternalKey from CRM_RetailerClubAssign where MatrixMemberId =1)
+2024-04-01 18:56:54,447 - API Automation -INFO - DataBase Connection Established successfully, DB URL : jdbc:sqlserver://SRRAADEVGUI; databaseName= MP_LMS;encrypt=true;trustServerCertificate=true
+2024-04-01 18:56:54,897 - API Automation -INFO - DB table updated With query :UPDATE SYSTEMPARAMETERS SET PARAMETERVALUE ='0' WHERE PARAMETERKEY = 'Security_CommGty_AuthenticationMethod'

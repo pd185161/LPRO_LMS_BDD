@@ -1,0 +1,3223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2019 rel. 3 sp1 (http://www.altova.com) by NCR CORP (NCR CORP) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:include schemaLocation="Includes/RestrictedDateAndDateTime.xsd"/>
+	<xsd:element name="HQL_Promotion_Interface">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Retailer" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Represents the Retailer Id which holds the promotions</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:all>
+							<xsd:element name="PromotionGroups" minOccurs="0">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="PromotionGroup" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:attribute name="ExternalGroupId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>PromotionGroup.ExternalGroupId</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="24"/>
+															<xsd:minLength value="1"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="Name" use="required">
+													<xsd:annotation>
+														<xsd:documentation>PromotionGroup.PromotionGroupName</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="40"/>
+															<xsd:minLength value="1"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="Description" use="optional">
+													<xsd:annotation>
+														<xsd:documentation>PromotionGroup.Remarks</xsd:documentation>
+													</xsd:annotation>
+												</xsd:attribute>
+												<xsd:attribute name="ParentExternalGroupId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>PromotionGroup.ParentGroupId FROM PromotionGroup WHERE PromotionGroup.ExternalGroupId = ImportPromotionGroups.ParentExternalGroupId</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="24"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Promotions" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Promotions Data</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="Promotion" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:all>
+													<xsd:element name="PromotionActiveDays" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionHeader table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="StartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.StartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="EndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.EndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnSunday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnSunday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnMonday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnMonday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnTuesday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnTuesday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnWednesday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnWednesday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnThursday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnThursday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnFriday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnFriday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnSaturday" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ActiveOnSaturday</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="EnhancedPromotionActiveDays" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionHeader table. CR LOYPRO-2889 Import Promotion Daily StartTime and EndTime</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="ActiveOnSunday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="SundayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SundayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SundayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SundayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnMonday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="MondayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MondayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MondayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MondayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnTuesday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="TuesdayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TuesdayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="TuesdayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TuesdayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnWednesday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="WednesdayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.WednesdayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="WednesdayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.WednesdayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnThursday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="ThursdayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ThursdayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ThursdayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ThursdayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnFriday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="FridayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.FridayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="FridayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.FridayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ActiveOnSaturday" type="xsd:boolean" use="required"/>
+															<xsd:attribute name="SaturdayStartTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SaturdayStartTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SaturdayEndTime" type="xsd:time" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SaturdayEndTime (HH:MM:SS)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionDetails" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionHeader table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="HeaderDescription" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionHeaderDescription</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="60"/>
+																		<xsd:minLength value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Status" type="xsd:boolean" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.Status
+0 - non active promotion
+1 - active promotion</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="TypeId" type="xsd:int" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionTypeId:
+1 - Single Item
+2 - Single Condition
+3 - Multi Condition
+4 - Total Ticket
+6 - Best Deal
+11 -Manual Item Discount
+12	- Manual Ticket Discount
+13	- Targeted Manual Item Discount (RSO)
+14	-Targeted Manual Item Discount
+15 - Multi Reward Price Comparison
+16 - Multi Reward
+17 - Multi Condition - Multi Reward
+18 - Manual UOM Item Discount</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="StartDate" type="restrictedDateTime" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionHeaderStartDate
+YYYY-MM-DDTHH:MM:SS</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="EndDate" type="restrictedDateTime" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionHeaderEndDate
+YYYY-MM-DDTHH:MM:SS</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="TargetPopulationType" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TargetPopulationType
+1 - All Customers
+2 - All Members
+3 - Segments
+4 - Non Members</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="RedemptionLimitMaximum" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RedemptionLimitDuringPromotionPeriod</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="RedemptionLimitPerDay" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RedemptionLimitDuringSingleDay</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="RedemptionLimitPerTransaction" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RedemptionLimitDuringSingleTicket</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MinimumPurchaseAmount" type="xsd:float" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MinimumPurchaseAmount</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Remarks" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.Remarks</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="500"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MarkdownCategoryId" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MarkdownCategoryKey</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="24"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MarkdownCategoryLevelId" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MarkdownCategoryKey</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="LimitedToHomeStoreOnly" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.LimitToHomeStoreOnly</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SponsorSupplierId" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>Converted To PromotionHeader.SponsorSupplierInternalKey FROM HOST.SupplierCode WHERE SupplierCode.SupplierId = SponsorSupplierId AND SupplierCode.MatrixMemberId = imported promotion MatrixMemberId</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="24"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="SharedFundingValue" type="xsd:float" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SharedFundingValue</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="PromotionReceiptDescription" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionReceiptDescription</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="40"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="AdditionalTypeId" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.AdditionalType
+0 - General
+Currently only additional type 0 is supported</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ContinuityScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ThresholdContinuityStatus
+1 - ContinuitySingleTicket
+2 - ContinuityAccomulate
+
+Value 2 allowed only in case:
+TargetPopulationType in (2,3)
+and
+PopulationOfflineMode = 1
+and
+TresholdTypeId in (1,2,3,6,4)
+and
+RewardTemplateId not in (1,10,52,54,51,57)</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="TriggerTiming" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TriggerImmediatelyUponMeetingCondition
+1 - immediate triggering when items is scanned
+0 - delayed triggering at end of ticket.Default value get from system parameter  &quot;Default_PromotionCalculation_Timing&quot;</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="DiscountAllocationFlag" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.DiscountAllocationFlag
+1 or missing - Checked
+0 - Unchecked
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="DiscountAllocationScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.DiscountAllocationScope
+1 - Department (refer to MarkdownCategoryId, MarkdownCategoryLevelId)
+2 - Single Item (From bucket)
+3 - Include all items
+4 - Include only the trigger items
+5 - Include only the RewardedItems</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CouponRewardsScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.CouponRewardsScope
+1 - Single Coupon
+2 - Separate Coupon</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PromotionFundingScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionFundingScope
+1 - Retailer funding only
+2 - Supplier funding only (refer to SponserSupplierId)
+3 - Share funding (refer to  SharedFundingScope,SharedFundingValue)
+4 - Store funding only
+5 - None</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="SharedFundingScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SharedFundingScope
+1 - Amount
+2 - Percent
+(In case needed but not sent in the file set to 1, according to GUI business rules)</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="TicketPrintingScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TicketPrintingScope
+0 - Apply Discount On Promotion Description
+1 - Apply Discount On Coupon
+2 - Print Rewarded Item Desc As Promo Desc
+3 - Free text
+4 - Do Not Apply Discount Printing In Ticket
+5 - Act by touchpoint logic
+6 - Apply Discount On Promotion Description with Qualify Spend – supported only for TypeId = 1,2,3 &amp;18 </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																		<xsd:enumeration value="6"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MeanOfPaymentScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MeanOfPaymentScope
+1 - MeanOfPayment
+2 - Discount
+3 - MeanOfPaymentDiscount
+Currently only value 2 is supported.</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ConflictScope" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionPriority
+1 - Never participate in conflict
+2 - Always wins
+3 - Normal
+4 - Always loses
+5 - Participate partial reward (Relevant only for Treshold.TriggerType = 8 - case quantity)
+6 - Advanced optimization</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																		<xsd:enumeration value="6"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PopulationSegmentsOperator" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PopulationSegmentsOperator
+1 - OR
+2 - AND</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PopulationLocalSegmentsOperator" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PopulationLocalSegmentsOperator
+1 - OR
+2 - AND</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PopulationOfflineMode" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PopulationOfflineMode
+1 - Online only
+2 - Also in offline
+3 - Only in offline
+4 - In offline disregard member segment condition</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="RequiredCoupon" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RequiredCoupon
+0 - remove coupon
+1 - attach coupon</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="CouponPrefix" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>Used for Coupon identification, but not saved in database
+Mandatory in case attribute RequiredCoupon=1 for externally pronted coupons, unless DocumentId is supplied in the import for internally printed coupons</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CouponBusinessId" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>CouponInstance.BusinessId
+Mandatory in case attribute RequiredCoupon=1 for externally pronted coupons, unless DocumentId is supplied in the import for internally printed coupons</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="150"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CouponInstanceDescription" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>CouponInstance.InstanceDescription
+Relevant in case attribute RequiredCoupon=1 for externally pronted coupons, unless DocumentId is supplied in the import for internally printed coupons</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="200"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="DocumentId" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>This attribute is not save in Promotion tables in the database, it&apos;s onlly used to find the internally printed coupon, see FSD482447 - Promotions Import to support Redemption Promotion for Internally Printed Coupons</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SegmentationMode" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SegmentationMode
+0 - Simple
+1 - Advanced</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ExternalGroupId" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionGroupId FROM PromotionGroup WHERE PromotionGroup.ExternalGroupId = ImportPromotionDetails.ExternalGroupId</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="24"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="AccountingCode" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.AccountingCode</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="24"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="AccountingSubCode" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.AccountingSubCode</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="24"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ReturnItemEligibility" type="xsd:byte" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ReturnItemEligibility
+0 - Promotion can not be activated on returned items
+1 - Promotion may be activated both on sale and returned  items
+2 - Promotion will be activated on returned items only (Refund Promotion)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="TicketPrintingText" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TicketPrintingText
+Relevant and mandatory when TicketPrintingScope = 3</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="100"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="HomeStoreScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.HomeStoreScope
+1 - Home Store Members Only
+2 - Non Home Store Members Only
+3 - Home Group Members Only
+4 - Non Home Group Members</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="RedemptionLimitScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RedemptionLimitScope
+0 - No Redemption Limit
+1 - Redemption Limit
+2 - UOM Limit</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:byte">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="UOMLimit" type="xsd:float" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.UOMLimit</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="UOMLimitType" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.UOMLimitType
+1 - Gram
+2 - KG
+3 - OZ
+4 - Liter
+5 - Gallon
+6 - Lb</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:byte">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																		<xsd:enumeration value="6"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PromotionFlowStatus" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionFlowStatus
+1 - Direct Promotion
+2 - Proposed Promotion</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:byte">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ExcludeItemsWithProhibitDiscount" type="xsd:short" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ExcludeItemsWithProhibitDiscount
+CRL59506_Loyalty_Exclude_Item_With_Prohibit_Discount_Flag</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="TriggerItemsExcludedFromOtherPromotions" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TriggerItemsExcludedFromOtherPromotions
+0 - Not Excluded
+1 - Excluded</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ExcludeTriggerItemsOfMarkedPromotions" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ExcludeTriggerItemsOfMarkedPromotions
+0 - Do Not Exclude
+1 - Exclude</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MeanOfPaymentTenderId" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MeanOfPaymentTenderId
+Relevant and mandatory when attribute MeanOfPaymentScope is 1, 3 or 4</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ExternalValidationRequired" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ExternalValidationRequired
+0 - Not Required
+1 - Required</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ExcludeRewardedItemsFromSpendConditionThreshold" type="xsd:short" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ExcludeRewardedItemsFromSpendConditionThreshold
+0 - Not Required
+1 - Required</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ConflictGroupId" type="xsd:short" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ConflictGroupId
+FSD255807 Support LPE Conflict Group at Promotion Level</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MemberRegistrationRequired" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRegistration.MemberRegistrationRequired FROM ImportPromotionDetails WHERE ImportPromotionDetails.PromotionHeaderId_IK = PromotionRegistration.PromotionHeaderId</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:short">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="RegisteredPromotionRedemption" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		PromotionRegistration.RegisteredPromotionRedemption FROM ImportPromotionDetails WHERE ImportPromotionDetails.PromotionHeaderId_IK = PromotionRegistration.PromotionHeaderId
+																		FSD 441814
+																		1 = Registered Promotion is set to Single Use
+																		0 = Unlimited
+																		2 = Redemptions are set per Household (CR 522735)
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="DeductRegistrationCost" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRegistration.DeductRegistrationCost FROM ImportPromotionDetails WHERE ImportPromotionDetails.PromotionHeaderId_IK = PromotionRegistration.PromotionHeaderId</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:short">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MemberAccountId" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRegistration.MemberAccountId FROM ImportPromotionDetails WHERE ImportPromotionDetails.PromotionHeaderId_IK = PromotionRegistration.PromotionHeaderId</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MemberAccountValue" type="xsd:decimal" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRegistration.MemberAccountValue FROM ImportPromotionDetails WHERE ImportPromotionDetails.PromotionHeaderId_IK = PromotionRegistration.PromotionHeaderId</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="LabelDescription" type="xsd:string" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.LabelDescription</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="LabelFormat1" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.LabelFormat1</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:minInclusive value="1"/>
+																		<xsd:maxInclusive value="99"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="LabelFormat2" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.LabelFormat2</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:minInclusive value="1"/>
+																		<xsd:maxInclusive value="99"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ApplyPartialRewardWithOptimization" type="xsd:boolean" use="optional"/>
+															<xsd:attribute name="LevelRepetition" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.LevelRepetition
+0 - Multiple Times Per Level
+1 - Once Per Level
+2 - Highest Level And Every Additional Unit
+3 - Apply Reward Per Item Position</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:short">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PromotionRewardWillBeDisregardedByOtherPromotions" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionRewardWillBeDisregardedByOtherPromotions</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="DisregardRewardOfMarkedPromotions" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.DisregardRewardOfMarkedPromotions</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MissedOffer" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MissedOffer</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="RedeemDigitalCoupon" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RedeemDigitalCoupon</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:token">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="DigitalCouponRequired" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.DigitalCouponRequired</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ManualPriorityValue" type="xsd:int" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ManualPriorityValue</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="PromotionDraftStatus" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionDraftStatus
+1 - Promotion
+2 - Draft</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:byte">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ExcludeFromPriceCompare" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ExcludeFromPriceCompare</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="TotalTriggerLimit" type="xsd:int" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TotalTriggerLimit</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="CalculatePromotionOnGrossPrice" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.CalculatePromotionOnGrossPrice
+FSD 404465
+1 = LPE will calculate both Condition and Reward based on item’s Gross price</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MinimumNumberOfItems" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MinimumNumberOfItems</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:minInclusive value="1"/>
+																		<xsd:maxInclusive value="99"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MinimumNumberApplyTo" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MinimumNumberApplyTo
+1 = Any Item
+2 = Different Items</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:short">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="AllowOmniChannelCoupon" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.AllowOmniChannelCoupon 
+Indicates whether an omni channel coupon is allowed in the redemption promotion
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:byte">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CalculatePromotionThresholdExcludeTax" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.CalculatePromotionThresholdExcludeTax
+0 - Include Tax Threshold
+1 - Excllude Tax Threshold
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:byte">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ItemRedemptionConfirmationRequired" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ItemRedemptionConfirmationRequired</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="CalculatePromotionPostTax" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.CalculatePromotionPostTax</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="MinimumItemPrice" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MinimumItemPrice
+FSD479817 - Support Minimum and Maximum Item Gross Price Limit</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:float">
+																		<xsd:minInclusive value="0"/>
+																		<xsd:maxInclusive value="999999999.999"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MaximumItemPrice" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MaximumItemPrice
+FSD479817 - Support Minimum and Maximum Item Gross Price Limit</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:float">
+																		<xsd:minInclusive value="0"/>
+																		<xsd:maxInclusive value="999999999.999"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MeanOfPaymentSharedTenderScope" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MeanOfPaymentSharedTenderScope
+0 - Amount
+1 - Percent</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:short">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MeanOfPaymentSharedTenderValue" type="xsd:float" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MeanOfPaymentSharedTenderValue</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="PauseFromExecutionOnStores" type="xsd:boolean" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PauseFromExecutionOnStores
+0 - Not paused
+1 - Paused from execution at header level</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="RdmConfirmationMsg" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.RdmConfirmationMsg
+The Message Text presented when Item Redemption Confirmation Required needs approval</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="150"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="DefaultRedemptionLimit" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		CR 522735
+																		PromotionRegistration.DefaultRedemptionLimit
+																		Relevant in case RegisteredPromotionRedemption is set to 2.
+																		Default value for Registered Redemptions in Registered Promotion using Limit Set Per Household.
+																		Can be defined from 1 – 999.
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:minInclusive value="1"/>
+																		<xsd:maxInclusive value="999"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="DisregardItemMinimumPrice" type="xsd:boolean" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		EPIC LOYPRO-3827 Limit Reward to Item Minimum Price
+																		PromotionHeader.DisregardItemMinimumPrice
+																		Represents an indication whether Item Minimum Price should be ignored while providing reward.
+																		1 - true, 0 - false
+																		Not supported with ThresholdTypeId = 8 (Multi Case Quantity)
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="Distribution" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionDistribution table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Store" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:attribute name="Id" type="xsd:string" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionDistribution.DistributedStoreInternalKey from HOST.StoreCode WHERE StoreCode.MatrixMemberId = ImportPromotions_DistributionToStores.MatrixMemberId AND StoreCode.StoreId = ImportPromotions_DistributionToStores.StoreId
+Id=0 for all stores</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="StartDate" type="restrictedDateTime" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionDistribution.StartDate</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="EndDate" type="restrictedDateTime" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionDistribution.EndDate</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="Suspended" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionDistribution.Suspended</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="Action" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>Not saved in the promotion tables, it&apos;s an action on PromotionDistribution table
+U = Update distribution
+D = Delete store/Mark store as deleted from distribution</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:enumeration value="U"/>
+																					<xsd:enumeration value="D"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionsLevels" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation/>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="PromotionsLevel" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:all>
+																			<xsd:element name="Reward">
+																				<xsd:annotation>
+																					<xsd:documentation>Populated into PromotionRewardAttributeValue table</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="RewardTemplateId" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.RewardTemplateId
+
+Triggered items:
+1 - New price
+2 - Amount off
+10 - Percent discount
+50 - Free item
+51 - Price Comparison
+
+TotalTicket:
+60 - Amount off
+61 - Percent off
+
+UOM:
+52 - New price
+53 - Amount off
+54 - Percent off
+56 - Free item
+57 - Price Comparison
+
+Member Account:
+20 - Earn Points/Credits/Visits
+64 - Deduct Points/Credits/Visits
+
+Coupon/Message:
+55 - Coupon
+62 - Target Message
+63 - ExternalDeviceReward (currently not supported)
+70 - Tender-Amount Off
+71 - Tender-Percent Off</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="10"/>
+																								<xsd:enumeration value="50"/>
+																								<xsd:enumeration value="60"/>
+																								<xsd:enumeration value="61"/>
+																								<xsd:enumeration value="52"/>
+																								<xsd:enumeration value="53"/>
+																								<xsd:enumeration value="54"/>
+																								<xsd:enumeration value="55"/>
+																								<xsd:enumeration value="56"/>
+																								<xsd:enumeration value="20"/>
+																								<xsd:enumeration value="64"/>
+																								<xsd:enumeration value="51"/>
+																								<xsd:enumeration value="57"/>
+																								<xsd:enumeration value="62"/>
+																								<xsd:enumeration value="70"/>
+																								<xsd:enumeration value="71"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardValue">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5000 OR AttributeId = 5030 [Member Account Only]</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="50"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardValueType" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5001
+When RewardTemplateId = 1:
+0 - Per item
+2 - All items
+3 - Per quantity of items
+
+When RewardTemplateId = 2:
+0 - for each rewarded item
+2 - on total price  of grouped items
+
+When RewardTemplateId = 52:
+0 - on total sales of item
+2 - on UOM price
+
+When RewardTemplateId = 53:
+0 - from UOM price
+2 - from total sales of item</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitDiscountScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5016
+When RewardTemplateId in (1,2,10,52,53,54):
+0 - All triggered items
+1 - Limit item count</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitItemScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5018
+When RewardTemplateId in (1,2,10,50,52,53,54,56):
+0 - Least expensive
+1 - Most expensive</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ConnectedSegmentId" use="optional">
+																						<xsd:simpleType>
+																							<xsd:annotation>
+																								<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5152</xsd:documentation>
+																							</xsd:annotation>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:minInclusive value="1"/>
+																								<xsd:maxInclusive value="999999999"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DisconnectedSegmentId" use="optional">
+																						<xsd:simpleType>
+																							<xsd:annotation>
+																								<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5154</xsd:documentation>
+																							</xsd:annotation>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:minInclusive value="1"/>
+																								<xsd:maxInclusive value="999999999"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="IncreaseMemberAccountId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5029
+Mandatory for RewardTemplateId = 20</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitItemCount" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5017
+Relevant and mandatory in case RewardTemplateId in (1,2,10,50,52,53,54,56) and LimitDiscountScope = 1 - limit item count</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="TimingScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5010
+0 - Immediate reward
+1 - Defer  reward to Member Account(Supported only for RewardTemplateId=20)
+2 - To payment voucher(currently not supported)</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitUOMScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5032
+When RewardTemplateId = 54:
+0 - No limit on reward
+1 - Limit reward amount to
+2 - Maximum OUM on reward calculation</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="PercentLimitationScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5035
+When RewardTemplateId in (10,61):
+0 - No limit on reward
+1 - Limit reward amount to
+2 - Maximum spend on reward calculation</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="IncreaseMemberAccountType" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5031
+1 - by units
+2 - by percent
+Mandatory for RewardTemplateId = 20</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ManualRewardValueScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5120
+0 - Fixed
+1 - Maximum
+Relevant and mandatory for PromotionTypeId in (11 ,12,13)</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="TriggerValueForIncentiveMsg" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5186
+Trigger Value for incentive message (mandatory in case incentive message is defined in the Message element)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitRewardAmount" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5036
+Relevant and mandatory when  RewardTemplateId in (10,61) and PercentLimitationScope = 1 (Limit reward amount to)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="MaximumSpendForReward" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5037
+Relevant and mandatory when  RewardTemplateId in (10,61) and PercentLimitationScope = 2 (Maximum spend on reward calculation)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReduceMemberAccountScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5012
+0 - Do not deduct
+1 - Deduct from Member Account
+2 - Zero Member Account
+3 - Reset Init Value Member Account
+4 - Deduct reward amount from MA
+5 - Accumulate into Member Account</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="4"/>
+																								<xsd:enumeration value="5"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReduceMemberAccountId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5013
+Relevant and mandatory in case ReduceMemberAccountScope in (1,2,3)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReduceMemberAccountValue" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeID = 5014
+Relevant and mandatory in case ReduceMemberAccountScope = 1 (Deduct from Member Account)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="MSUQuantity" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5158
+Relevant and mandatory when RewardValueType = 3</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReduceMemberAccountValidationAppliesTo" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5043
+100 - Current balance
+101 - Opening  balance
+102 - Earnings this visit</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="100"/>
+																								<xsd:enumeration value="101"/>
+																								<xsd:enumeration value="102"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReducePriceScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5112
+0 - Fix value reward
+1 - Inject Reward from member account
+3 - Inject Reward From item DA
+4 - Inject Reward From Customer Account
+5 - Inject Reward From Item Price</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="4"/>
+																								<xsd:enumeration value="5"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="InjectRewardFromMAId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5113</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="InjectRewardFromItemPrice" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5205</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="MABalanceType" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5114
+100 - Current balance
+101 - Opening  balance
+102 - Earnings this visit</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="100"/>
+																								<xsd:enumeration value="101"/>
+																								<xsd:enumeration value="102"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReduceMAByRewardValue" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5118
+0 - Not allowed
+1 - Allowed</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitRewardMAAmount" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5116
+0 - Not allowed
+1 - Allowed</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitRewardMAScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5044
+1 - to minimum new price of
+2 - Amount to maximum of
+3 - Percentage to maximum of</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="LimitRewardValue" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5117</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CalculateRewardOnPurchasedAmount" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5134
+0 - Rounded to the last trigger
+1 - Exact amount
+2 - Rounded to next trigger level</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="InjectRewardFromDAId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5190</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardEnteredByCashier" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5006
+0 - not allowed By Cashier
+1 - allowed By Cashier</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="AccumulateDiscountIntoMemberAccount" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5055
+0 - No
+1 - Yes</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DiscountsAccumulatingMemberAccountId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5052</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CashierMaximumManualRewardSource" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5191
+0 - Fixed
+1 - Inject from member account. Relevant and mandatory when AttributeId 5120 = 1</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="CashierMaximumManualMAId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5192
+Relevant and mandatory when AttributeId  5191 = 1 - inject from member account</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CashierMaximumManualMABalanceType" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5193
+100 - Current balance
+101 - Opening balance
+102 - Earnings this visit
+Relevant and mandatory when AttributeId  5191 = 1 - inject from member account</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="100"/>
+																								<xsd:enumeration value="101"/>
+																								<xsd:enumeration value="102"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ReduceMemberAccountValueScope" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5194
+1 - Value
+2 - Amount</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CalculatePromotionRewardExcludeTax" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5195
+0 - Calculate Promotion Reward with Tax
+1 - Calculate Promotion Reward without Tax</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="AddTaxAmountToRewardAmount" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5196
+0 - Do not Add Tax to Reward Amount
+1 - Add Tax to Reward Amount</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="TimingMemberAccountScope" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5011
+Contains Account ID.
+Relevant and mandatory in case TimingScope=1 (Defer Reward to Member Account)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardPointsExpirationValue" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5354
+This attribute is supported in the center but not in LPE
+Contains Account Expiration value (number of days or month untill expiration for the value added to the account), reward member account section</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="AdditionalPointsExpirationValue" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5355
+This attribute is supported in the center but not in LPE
+Contains Account Expiration value (number of days or month untill expiration for the value added to the account), reward update member account balance section</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardIntoMAExpirationValue" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5356
+This attribute is supported in the center but not in LPE
+Contains Account Expiration value (number of days or month untill expiration for the value added to the account), reward timing section</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="IssueDigitalCoupon" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5197</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:token">
+																								<xsd:maxLength value="50"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DigitalCouponRequired" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5198
+0 - Not required
+1 - Required</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ManualEntryAllowed" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5206
+0 - Not allowed
+1 - Allowed</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentType" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute ID = 5129
+5 - Coupon
+10 - Voucher
+Should not be sent when using Alpha Nomeric coupon</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="5"/>
+																								<xsd:enumeration value="10"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute Id = 5025 (TimingVoucherId)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentValidScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute ID = 5122 (VoucherValidScope)
+1 - Valid for X days
+2 - Valid between dates
+3 - Always</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentStartingFrom" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute ID = 5123 (VoucherStartingFrom)
+0 - Issue Date
+1 - 1 Day from Issuing
+2 - 1 Week From issuing
+3 - 2 weeks from issuing
+4 - 1st on next month</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="4"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentValidForXDays" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute Id = 5124 (VoucherValidForXDays)</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:minInclusive value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentValidFrom" type="xsd:date" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute Id = 5125 (VoucherStartingFrom)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="DocumentValidTo" type="xsd:date" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE Attribute Id = 5126 (VoucherValidTo)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="IssueOmniChannelCoupon" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5207
+Indicates whether an omni channel coupon is issued in this promotion</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="MinimumManualMAValue" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5224</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:float">
+																								<xsd:minInclusive value="0.001"/>
+																								<xsd:maxInclusive value="999999999.999"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="MinimumManualMABalanceType" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5225
+100 - Current balance
+101 - Opening balance
+102 - Earnings this visit</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:short">
+																								<xsd:enumeration value="100"/>
+																								<xsd:enumeration value="101"/>
+																								<xsd:enumeration value="102"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="TaxExecutionMethod" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5226
+1 - As Discount
+2 - As Mean of Payment</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="TenderIDForTax" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5227</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CampaignLimitsScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5445
+0 - No Campaign Limits
+1 - Maximum Promotion Redemptions
+2 - Maximum Promotion Rewards</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="MaximumPromotionRedemptions" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5442</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:minInclusive value="1"/>
+																								<xsd:maxInclusive value="999999999"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="MaximumPromotionRewards" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5443</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:double">
+																								<xsd:minInclusive value="0"/>
+																								<xsd:maxInclusive value="99999999"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="IssueCompensationDocumentScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5228
+0 - Never
+1 - Offline
+2 - Not enough barcodes
+3 - Offline or not enough barcodes</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="CompensationDocumentId" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5229
+The document id of the compensation coupon/voucher</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CompensationValidScope" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5230
+1 - Valid for X days
+2 - Valid between dates
+3 - Always</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="CompensationStartingFrom" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5231
+0 - Issue date
+1 - One day from issuing
+2 - One week from issuing
+3 - 2 weeks from issuing
+4 - 1 on next month
+Relevant if attribute CompensationValidScope = 1</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:byte">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="4"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="CompensationValidForXDays" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5232
+Relevant if attribute CompensationValidScope = 1</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:minInclusive value="1"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="CompensationValidFrom" type="xsd:date" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5233
+Relevant if attribute CompensationValidScope = 2</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="CompensationValidTo" type="xsd:date" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5234
+Relevant if attribute CompensationValidScope = 2</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="RecalculateTaxAfterPromotionDiscount">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5199
+CRL 505739 Add Recalculate Tax after promotions discount attribute to promotion builder</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardLimitationScope" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5242
+Used When RewardTemplateId in (2, 60, 53, 70, 20)
+0 - No limit on reward
+1 - Limit reward amount to
+3 – Limit reward amount down to 0.01 balance</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="RewardLimitationAmount" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeID = 5243. 
+Used When RewardTemplateId in (2, 60, 53, 70, 20) 
+AND PromotionRewardAttributeValue.AttributeValue (AttributeID = 5242) = ‘1’</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																			<xsd:element name="Thresholds">
+																				<xsd:annotation>
+																					<xsd:documentation>Populated into PromotionBucketThreshold table</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:sequence>
+																						<xsd:element name="Threshold" maxOccurs="unbounded">
+																							<xsd:complexType>
+																								<xsd:attribute name="BucketId" type="xsd:integer" use="required">
+																									<xsd:annotation>
+																										<xsd:documentation>PromotionBucketThreshold.BucketId</xsd:documentation>
+																									</xsd:annotation>
+																								</xsd:attribute>
+																								<xsd:attribute name="ThresholdTypeId" use="required">
+																									<xsd:annotation>
+																										<xsd:documentation>PromotionBucketThreshold.ThresholdTypeId
+1 - Item spend
+2 - Quantity
+3 - UOM
+4 - Total ticket
+5 - Member account
+6 - UOM items quantity
+7 - UOM item spend
+8 - Multi Case Quantity
+9 - Tender spend
+10 – Tender BIN spend
+</xsd:documentation>
+																									</xsd:annotation>
+																									<xsd:simpleType>
+																										<xsd:restriction base="xsd:integer">
+																											<xsd:enumeration value="1"/>
+																											<xsd:enumeration value="2"/>
+																											<xsd:enumeration value="3"/>
+																											<xsd:enumeration value="4"/>
+																											<xsd:enumeration value="5"/>
+																											<xsd:enumeration value="6"/>
+																											<xsd:enumeration value="7"/>
+																											<xsd:enumeration value="8"/>
+																											<xsd:enumeration value="9"/>
+																											<xsd:enumeration value="10"/>
+																										</xsd:restriction>
+																									</xsd:simpleType>
+																								</xsd:attribute>
+																								<xsd:attribute name="ThresholdValue" type="xsd:float" use="required">
+																									<xsd:annotation>
+																										<xsd:documentation>PromotionBucketThreshold.ThresholdValue</xsd:documentation>
+																									</xsd:annotation>
+																								</xsd:attribute>
+																								<xsd:attribute name="ThresholdSubTypeId" type="xsd:int" use="optional">
+																									<xsd:annotation>
+																										<xsd:documentation>PromotionBucketThreshold.ThresholdSubTypeId
+When ThresholdTypeId = 5:
+MemberAccountId
+
+When ThresholdTypeId = 3:
+1 - Gram
+2 - KG
+3 - OZ
+4 - Liter
+5 - Gallon
+6 - LB
+
+When ThresholdTypeId = 9:
+TenderId existing in the Tender table</xsd:documentation>
+																									</xsd:annotation>
+																								</xsd:attribute>
+																							</xsd:complexType>
+																						</xsd:element>
+																					</xsd:sequence>
+																				</xsd:complexType>
+																			</xsd:element>
+																			<xsd:element name="Messages" minOccurs="0">
+																				<xsd:annotation>
+																					<xsd:documentation>Populated into PromotionRewardAttributeValue table</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:sequence>
+																						<xsd:element name="Message" maxOccurs="unbounded">
+																							<xsd:complexType>
+																								<xsd:attribute name="AttributeId" use="required">
+																									<xsd:annotation>
+																										<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId listed below
+Supported Attributes:
+Communication messages (must to have identical definitions for all levels):
+5159 - Customer communication of reward message id
+5160 - Customer communication of reward message timing
+5162 - Operator communication of reward message id
+5163 - Operator communication of reward message timing
+5165 - Receipt communication of reward message  id
+5166 - Receipt communication of reward message  timing
+5168 - Communication of reward special effect at Pos
+
+Incentive messages (must be defined only on first level):
+5169 - Customer incentive message id
+5170 - Customer incentive message timing
+5172 - Operator incentive message id
+5173 - Operator incentive message timing
+5175 - Receipt incentive message  id
+5176 - Receipt incentive message  timing
+5178 – Incentive message special effect at Pos
+5186 - Trigger value for incentive message
+5223 - Automatic condition fulfillment
+
+Approval messages  (must to have identical definitions for all levels):
+5179 - Customer approval message id
+5180 - Customer approval message timing
+5182 - Operator approval message id
+5183 - Operator approval message timing
+5185 – Approval message special effect at Pos
+
+Cashier confirmation message (must to have identical definitions for all levels):
+5045 - PromptCashierForConditions
+5046 - PosTemplateName
+5047 - PromptMessageType
+5048 - PromptOnChangeDueToVoidItem
+5049 - PosMessageFormat
+5050 - ApplyNoAnswerOnAllPreviousRewards
+5051 - RePromptAfterNoAnswer
+
+Fuel terminal messages attributes:
+5211 - FuelTermTargetMsgId
+5212 - FuelTermTargetMsgTiming
+5214 - FuelTermCommunicationOfRewardMsgId
+5215 - FuelTermCommunicationOfRewardMsgTiming
+5217 - FuelTermIncentiveMsgId
+5218 - FuelTermIncentiveMsgTiming
+5220 - FuelTermApprovalMsgId
+5221 - FuelTermApprovalMsgTiming
+
+Target Messages:
+5142 - Customer Target Message ID
+5143 - Customer Target Message Timing
+5144 - Operator Target Message ID
+5145 - Operator Target Message Timing
+5146 - Receipt Target Message ID
+5147 - Receipt Target Message Timing
+5148 - Target Message Special effect at POS</xsd:documentation>
+																									</xsd:annotation>
+																									<xsd:simpleType>
+																										<xsd:restriction base="xsd:integer">
+																											<xsd:enumeration value="5159"/>
+																											<xsd:enumeration value="5160"/>
+																											<xsd:enumeration value="5162"/>
+																											<xsd:enumeration value="5163"/>
+																											<xsd:enumeration value="5165"/>
+																											<xsd:enumeration value="5166"/>
+																											<xsd:enumeration value="5168"/>
+																											<xsd:enumeration value="5169"/>
+																											<xsd:enumeration value="5170"/>
+																											<xsd:enumeration value="5172"/>
+																											<xsd:enumeration value="5173"/>
+																											<xsd:enumeration value="5175"/>
+																											<xsd:enumeration value="5176"/>
+																											<xsd:enumeration value="5178"/>
+																											<xsd:enumeration value="5179"/>
+																											<xsd:enumeration value="5180"/>
+																											<xsd:enumeration value="5182"/>
+																											<xsd:enumeration value="5183"/>
+																											<xsd:enumeration value="5185"/>
+																											<xsd:enumeration value="5045"/>
+																											<xsd:enumeration value="5046"/>
+																											<xsd:enumeration value="5047"/>
+																											<xsd:enumeration value="5048"/>
+																											<xsd:enumeration value="5049"/>
+																											<xsd:enumeration value="5050"/>
+																											<xsd:enumeration value="5051"/>
+																											<xsd:enumeration value="5211"/>
+																											<xsd:enumeration value="5212"/>
+																											<xsd:enumeration value="5214"/>
+																											<xsd:enumeration value="5215"/>
+																											<xsd:enumeration value="5217"/>
+																											<xsd:enumeration value="5218"/>
+																											<xsd:enumeration value="5220"/>
+																											<xsd:enumeration value="5221"/>
+																											<xsd:enumeration value="5223"/>
+																											<xsd:enumeration value="5142"/>
+																											<xsd:enumeration value="5143"/>
+																											<xsd:enumeration value="5144"/>
+																											<xsd:enumeration value="5145"/>
+																											<xsd:enumeration value="5146"/>
+																											<xsd:enumeration value="5147"/>
+																											<xsd:enumeration value="5148"/>
+																										</xsd:restriction>
+																									</xsd:simpleType>
+																								</xsd:attribute>
+																								<xsd:attribute name="AttributeValue" use="required">
+																									<xsd:annotation>
+																										<xsd:documentation>PromotionRewardAttributeValue.AttributeValue</xsd:documentation>
+																									</xsd:annotation>
+																									<xsd:simpleType>
+																										<xsd:restriction base="xsd:string">
+																											<xsd:maxLength value="50"/>
+																										</xsd:restriction>
+																									</xsd:simpleType>
+																								</xsd:attribute>
+																							</xsd:complexType>
+																						</xsd:element>
+																					</xsd:sequence>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:all>
+																		<xsd:attribute name="Id" type="xsd:integer" use="required"/>
+																		<xsd:attribute name="ExternalLevelRef" type="xsd:integer" use="optional"/>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionsBuckets" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotiomBucket table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="PromotionsBucket" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="BucketEntity" minOccurs="0" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Populated into PromotionBucketEntityTable</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="EntityId" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.EntityInternalkey FROM HOST table, depending on EntityTypeId</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="24"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityType" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.EntityTypeId
+0 - Item
+2 - Category
+3 - Supplier
+6 - Tender
+14 - Dynamic Attribute
+46 – Tender BIN
+</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="0"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="6"/>
+																								<xsd:enumeration value="14"/>
+																								<xsd:enumeration value="46"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityLevel" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>Not saved in Promotion tables, but used (and mandatory) to find the category when EntityType = 2</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityValue" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.EntityValue
+Relevant If EntityType = 14 (DynamicAttribute)</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="100"/>
+																								<xsd:pattern value="[ -!#-%(-;=?-~]{1,100}"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityOperator" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.EntityOperator
+Relevant and mandatory when EntityType = 14 (Dynamic Attribute)
+Only supported value is &quot;=&quot;
+Relevant and mandatory when EntityType = 46 (Tender BIN)
+supported values are &quot;=&quot;  OR &quot;Between&quot;  OR &quot;StartsWith&quot; 
+
+
+</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="10"/>
+																								<xsd:enumeration value="="/>
+																								<xsd:enumeration value="Between"/>
+																								<xsd:enumeration value="StartsWith"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityAdditionalValue" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+PromotionBucketEntity.EntityAdditionalValue
+Relevant If EntityType = 14 (DynamicAttribute)  OR EntityType=46(Tender BIN)  AND EntityOperator = &quot;Between&quot;
+</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="100"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="AndOrOperator" type="xsd:boolean" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.EntityAndOrOperator
+0 - AND
+1 - OR</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="Exclude" type="xsd:boolean" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.Exclude
+1 - Exclude
+0 - Not excluded</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="MultiRewardValue" type="xsd:float" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.MultiRewardValue
+Upon saving a promotion of Multi Reward Price Comparison promotion type, the promotion will be saved with multiple reward values, one per each item in the bucket</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityAdditionalName" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionCompetitorItems.CompetitorItemDescription</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="160"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="ItemRedemptionLimit" type="xsd:int" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionBucketEntity.ItemRedemptionLimit
+Redemption limit at bucket item level (Upon saving a promotion of type Multi Condition-Multi Reward, the Quantity bucket will be saved with redemption limit per item)</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="EntityViewId" type="xsd:short">
+																						<xsd:annotation>
+																							<xsd:documentation>Not saved in Promotion tables, but usedto identify the correct Hierarchy when EntityTypeId = 2</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																		<xsd:attribute name="Id" type="xsd:int" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.BucketId</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="Name" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.BucketName</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="40"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="QtySize" type="xsd:int" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.QtySize</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="QtySizeMinValue" type="xsd:float" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.QtySizeMinValue</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="QtySizeMaxValue" type="xsd:float" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.QtySizeMaxValue</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="MinimumRequiredValue" type="xsd:float" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.MinimumRequiredValue</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="ThresholdAppliesTo" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.ThresholdAppliesTo
+In case ThresholdTypeId != 5 and ThresholdTypeId != 9 and ThresholdTypeId != 10
+0 - Any item
+1 - Same items
+2 - Different items
+3 - Same Internal Number
+4 - Different Internal Number
+
+In case ThresholdTypeId = 5
+0 - Current balance
+101 - Opening balance
+102 - Earning this visit
+103 - Redemption This Visit - unused for now, will pass schema validation but will fail stp_ImportPromotions_Validation
+
+In case ThresholdTypeId = 9 Or 10
+201 - Any Tender</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:int">
+																					<xsd:enumeration value="0"/>
+																					<xsd:enumeration value="1"/>
+																					<xsd:enumeration value="2"/>
+																					<xsd:enumeration value="3"/>
+																					<xsd:enumeration value="4"/>
+																					<xsd:enumeration value="101"/>
+																					<xsd:enumeration value="102"/>
+																					<xsd:enumeration value="103"/>
+																					<xsd:enumeration value="201"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="ParticipateInReward" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.ParticipateInReward
+0 - not participating
+1 - participating</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="IncentiveMsgAppliesTo" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.IncentiveMsgAppliesTo
+NULL - There is no Incentive Message
+1 - Contains Incentive Message</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:int">
+																					<xsd:enumeration value="1"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="RewardCalculationStartsFromMinValue" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.RewardCalculationStartsFromMinValue
+0 - Reward Calculation starts from 0
+1 - Reward Calculation starts from minimum Value</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:int">
+																					<xsd:enumeration value="0"/>
+																					<xsd:enumeration value="1"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="AndOrOperator" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.AndOrOperator
+0 - AND
+1 - OR</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="AllocateDiscountBreakdown" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.AllocateDiscountBreakdown
+0 - No allocation
+1 - Allocation</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="RoundingToMultipleOf" type="xsd:float" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.RoundingToMultipleOf
+Sets the rounding rule for promotion triggering purposes</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="LimitRewardedByConditionSpend" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.LimitRewardedByConditionSpend
+When the flag’s value = TRUE, then the LPE will apply the reward only on the quantity/volume, derived from the total spend in the fixed condition</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="BucketTriggerItemsWillBeExcludedFromOtherPromotions" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.BucketTriggerItemsWillBeExcludedFromOtherPromotions</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="BucketExcludeTriggerItemsOfMarkedPromotions" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.BucketExcludeTriggerItemsOfMarkedPromotions</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="DeductTenderAmountFromQualifyingTicketSpend" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.DeductTenderAmountFromQualifyingTicketSpend
+Deduct tender amount from Ticket qualifying Spend, for &apos;Ticket Spend&apos; condition type, only. CR 519878.</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="ApplyOnGrossTenderAmount" type="xsd:boolean" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionBucket.ApplyOnGrossTenderAmount	LOYPRO-3589 - Tender Based Promotion Based on Transaction Gross Amount</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionLoyaltySegments" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionSegments table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="PromotionLoyaltySegment" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:attribute name="SegmentId" use="required">
+																			<xsd:simpleType>
+																				<xsd:annotation>
+																					<xsd:documentation>PromotionSegments.SegmentInternalkey FROM LOYALTY.CRM_Segment WHERE CRM_Segment.ClubInternalKey = ImportPromotions_LoyaltySegments.ClubInternalKey AND CRM_Segment.SegmentId = ImportPromotions_LoyaltySegments.SegmentId
+Carries SegmentId value in case attribute ElementType = 0 (segment) and carries Operator value in case attribute ElementType = 1 (opeartor).
+The possible operator values are:
+1 - AND
+2 - OR
+3 - NOT
+4 - (
+5 - )</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:restriction base="xsd:int">
+																					<xsd:minInclusive value="1"/>
+																					<xsd:maxInclusive value="999999999"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Exclude" type="xsd:boolean" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionSegments.Exclude
+1 - Exclude
+0 - Include</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="LineId" type="xsd:int" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionSegments.LineId
+Relevant, mandatory and unique for advanced segmentation mode</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="ElementType" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionSegments.ElementType
+0 - segment
+1 - operator
+Relevant and mandatory for advanced segmentation mode</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:int">
+																					<xsd:enumeration value="0"/>
+																					<xsd:enumeration value="1"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="LinkedPromotions" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionLinkedPromotion table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="LinkedPromotion" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:attribute name="LinkedPromotionId" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionLinkedPromotion.LinkedPromotionHeaderId WHERE ((ImportPromotions_LinkedPromotion.MatrixMemberId = PromotionHeader.MatrixMemberId AND ImportPromotions_LinkedPromotion.LinkedPromotionId_IK = PromotionHeader.PromotionHeaderId) OR ImportPromotions_LinkedPromotion.MatrixMemberId = ImportPromotionDetails.MatrixMemberId AND ImportPromotions_LinkedPromotion.LinkedPromotionId_IK = ImportPromotionDetails.PromotionHeaderId_IK))</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="24"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionAttributes" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionAttributeValue table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Attribute" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:attribute name="Id" type="xsd:int" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionAttributeValue.AttributeId</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="Value" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionAttributeValue table:
+Field LongStringValue WHEN ImportPromotions_PromotionAttributesAttributeDataType = 7
+Field StringValue WHEN ImportPromotions_PromotionAttributes.AttributeDataType = 1
+Field LongValue WHEN ImportPromotions_PromotionAttributes.AttributeDataType = 2
+Field MoneyValue WHEN ImportPromotions_PromotionAttributes.AttributeDataType = 3
+Field DoubleValue WHEN ImportPromotions_PromotionAttributes.AttributeDataType = 4
+Field DateValue WHEN ImportPromotions_PromotionAttributes.AttributeDataType = 5
+Field BooleanValue WHEN ImportPromotions_PromotionAttributes.AttributeDataType = 6</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="1024"/>
+																					<xsd:minLength value="1"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="Translations" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into TranslatedValues table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Attribute" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="Language" minOccurs="0" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Element inside TranslationXML column in TranslatedValues table</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="LanguageId" type="xsd:int" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>Unique id of Language inside TranslationXML column in TranslatedValues table</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="Value" type="xsd:string" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>Translated value according to LanguageId.</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																		<xsd:attribute name="AttributeId" type="xsd:string" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>Attribute Id in Entity of Translation</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="CheckoutGroups" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation>Populated into PromotionCheckoutGroup table</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="CheckoutGroup" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:attribute name="CheckoutGroupId" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionCheckoutGroup.CheckoutGroupInternalKey FROM HOST.CHeckhoutGroup WHERE ImportPromotions_CheckoutGroups.MatrixmemerId = CheckoutGroups.MatrixMemberId AND ImportPromotions_CheckoutGroups.CheckoutGroupId = CheckoutGroups.CheckoutGroupId</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:short">
+																					<xsd:minInclusive value="1"/>
+																					<xsd:maxInclusive value="99"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Exclude" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionCheckoutGroup.Exclude
+1 - Excluded
+0 - Included</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:byte">
+																					<xsd:enumeration value="0"/>
+																					<xsd:enumeration value="1"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="MarketingAttributes" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="Channels">
+																	<xsd:annotation>
+																		<xsd:documentation>Populated into PromotionMarketingChannels table</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="Channel" maxOccurs="unbounded">
+																				<xsd:complexType>
+																					<xsd:attribute name="ChannelId" type="xsd:integer" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>PromotionMarketingChannels.MarketingChannelId
+1 -Targeted Marketing
+2 - Portal
+3 - Mobile</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="MarketingProperties">
+																	<xsd:annotation>
+																		<xsd:documentation>Populated into PromotionMarketingAttributes table</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:attribute name="Title" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionMarketingAttributes.Title</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:minLength value="1"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Description" type="xsd:string" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionMarketingAttributes.Description</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="ImageLink" type="xsd:string" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionMarketingAttributes.ImageLink
+Link between the promotion and an image with marketing message</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="Link" type="xsd:string" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionMarketingAttributes.HyperLink
+Link between the promotion and a page in the website with marketing message</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="Restrictions" type="xsd:string" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionMarketingAttributes.Restrictions
+Promotion&apos;s restrictions (redemption limit, expiration, etc.)</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="MarketingPriority" type="xsd:integer" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionMarketingAttributes.Priority
+Configurable list that defines the promotion’s priority</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="SavingValue" type="xsd:decimal" use="optional"/>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionSchemes" minOccurs="0">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="PromotionScheme" maxOccurs="unbounded">
+																	<xsd:complexType>
+																		<xsd:attribute name="SchemeId" type="xsd:short" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionSchemes.SchemeInternalKey FROM Scheme WHERE Sheme.MatrixMemberId = ImportPromotions_PromotionSchemes.MatrixMemberId AND Sheme.SchemeId = ImportPromotions_PromotionSchemes.SchemeId AND Sheme.SchemeTypeId = ImportPromotions_PromotionSchemes.SchemeTypeId</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="SchemeTypeId" type="xsd:short" use="required">
+																			<xsd:annotation>
+																				<xsd:documentation>PromotionSchemes.SchemeTypId</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:all>
+												<xsd:attribute name="PromotionHeaderId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>PromotionHeader.ExternalReferenceId</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="50"/>
+															<xsd:minLength value="1"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="Action" use="optional">
+													<xsd:annotation>
+														<xsd:documentation>This attribute indicate which action to be performed:
+S - Suspend all the stores in the promotion distribution
+US - Un-suspend all the stores in the promotion distribution. For regular insert/update of promotion this attribute shouldn&apos;t be sent.
+DU - Distribution Update only</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="2"/>
+															<xsd:enumeration value="S"/>
+															<xsd:enumeration value="US"/>
+															<xsd:enumeration value="DU"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="Legend" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Default values of unknown Promotion attributes when values are not sent in the import file</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:all>
+													<xsd:element name="PromotionActiveDays" minOccurs="0">
+														<xsd:complexType>
+															<xsd:attribute name="ActiveOnSunday" type="xsd:boolean" use="optional" default="1"/>
+															<xsd:attribute name="ActiveOnMonday" type="xsd:boolean" use="optional" default="1"/>
+															<xsd:attribute name="ActiveOnTuesday" type="xsd:boolean" use="optional" default="1"/>
+															<xsd:attribute name="ActiveOnWednesday" type="xsd:boolean" use="optional" default="1"/>
+															<xsd:attribute name="ActiveOnThursday" type="xsd:boolean" use="optional" default="1"/>
+															<xsd:attribute name="ActiveOnFriday" type="xsd:boolean" use="optional" default="1"/>
+															<xsd:attribute name="ActiveOnSaturday" type="xsd:boolean" use="optional" default="1"/>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionDetails" minOccurs="0">
+														<xsd:complexType>
+															<xsd:attribute name="AdditionalTypeId" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.AdditionalType
+0 - General</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ContinuityScope" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.ThresholdContinuityStatus
+1 - ContinuitySingleTicket
+2 - ContinuityAccomulate
+
+Value 2 allowed only in case:
+TargetPopulationType in (2,3) AND PopulationOfflineMode = 1 AND TresholdTypeId in (1,2,3,6) AND RewardTemplateId not in (1,10,52,54,60,61,51,57)</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="TriggerTiming" type="xsd:boolean" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TriggerImmediatelyUponMeetingCondition
+1 – True, i.e. immediate triggering when items is scanned
+0 – False, i.e. delayed triggering at end of ticket.Default value get from system parameter &quot;Default_PromotionCalculation_Timing&quot;</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="DiscountAllocationScope" use="optional" default="5">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.DiscountAllocationScope
+1 - Department (refer to MarkdownCategoryId, MarkdownCategoryLevelId)
+2 - Single Item (From bucket)
+3 - Include all items
+4 - Include only the trigger items
+5 - Include only the RewardedItems</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CouponRewardsScope" use="optional" default="2">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.CouponRewardsScope
+1 - Single Coupon
+2 - Separate Coupon</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PromotionFundingScope" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionFundingScope
+1 - Retailer funding only
+2 - Supplier funding only (refer to SponserSupplierId)
+3 - Share funding (refer to  SharedFundingScope,SharedFundingValue)
+4 - Store funding only</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="SharedFundingScope" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.SharedFundingScope
+1 - Amount
+2 - Percent
+In case needed but not sent in the file set to 1, according to GUI business rules</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="TicketPrintingScope" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.TicketPrintingScope
+0 - Apply Discount On Promotion Description
+1 - Apply Discount On Coupon
+2 - Print Rewarded Item Desc As Promo Desc
+3 - Free text (currently not supported by import)
+5 - Act by touchpoint logic</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="5"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MeanOfPaymentScope" use="optional" default="2">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.MeanOfPaymentScope
+1 - MeanOfPayment
+2 - Discount
+3 - MeanOfPaymentDiscount
+4 - Discount, Included as Tender for Tender promotions
+Currently only value 2 is supported.</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ConflictScope" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PromotionPriority
+1 - Exclude From Conflict
+2 - Always Wins
+3 - Default Rules
+4 - Always Loses
+5 - Participate partial reward (Relevant only for Treshold.TriggerType = 8 - case quantity)
+6 - Advanced Optimization
+If PromotionHeader.PromotionPriority is not equal 1 then its value is Overriding according to business rules defined in the GUI</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																		<xsd:enumeration value="6"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PopulationSegmentsOperator" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PopulationSegmentsOperator
+1 - OR
+2 - AND</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PopulationLocalSegmentsOperator" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PopulationLocalSegmentsOperator
+1 - OR
+2 - AND</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PopulationOfflineMode" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionHeader.PopulationOfflineMode
+1 - Online only
+2 - Also in offline
+3 - Only in offline
+4 - In offline disregard member segment condition</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="Reward" minOccurs="0">
+														<xsd:complexType>
+															<xsd:attribute name="TimingScope" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5010
+0 - Immediate reward
+1 - Defer reward to Member Account (supported only for RewardTemplateId=20)
+2 - To payment voucher (currently not supported)</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="LimitUOMScope" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5032
+When RewardTemplateId = 54:
+0 - no limit on reward
+1 - limit reward amount to
+2 - maximum OUM on reward calculation</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="PercentLimitationScope" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5035
+When RewardTemplateId in (10,61):
+0 - No limit on reward
+1 - Limit reward amount to
+2 - Maximum spend on reward calculation</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="IncreaseMemberAccountType" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5031
+1 - By units
+2 - By percent
+Mandatory for RewardTemplateId = 20</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ManualRewardValueScope" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionRewardAttributeValue.AttributeValue WHERE AttributeId = 5120
+0 - Fixed
+1 - Maximum
+Relevant and mandatory for PromotionTypeId in (11 ,12,13)</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="PromotionsBucket" minOccurs="0">
+														<xsd:complexType>
+															<xsd:attribute name="ThresholdAppliesTo" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionBucket.ThresholdAppliesTo
+In case ThresholdTypeId != 5 and ThresholdTypeId != 9
+0 - Any item
+1 - Same items
+2 - Different items
+
+In case ThresholdTypeId = 5
+0 - Current balance
+101 - Opening balance
+102 - Earning this visit
+103 - Redemption This Visit
+
+In case ThresholdTypeId = 9
+201 - Any Tender</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="101"/>
+																		<xsd:enumeration value="102"/>
+																		<xsd:enumeration value="201"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ParticipateInReward" type="xsd:boolean" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionBucket.ParticipateInReward
+0 - not participating
+1 - participating</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="AndOrOperator" type="xsd:boolean" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionBucket.AndOrOperator
+0 - AND
+1 - OR</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="AllocateDiscountBreakdown" type="xsd:boolean" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionBucket.AllocateDiscountBreakdown
+0 - No allocation
+1 - Allocation</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="BucketEntity" minOccurs="0">
+														<xsd:complexType>
+															<xsd:attribute name="AndOrOperator" type="xsd:boolean" use="optional" default="1">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionBucketEntity.EntityAndOrOperator
+0 - AND
+1 - OR</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Exclude" type="xsd:boolean" use="optional" default="0">
+																<xsd:annotation>
+																	<xsd:documentation>PromotionBucketEntity.Exclude
+1 - Excluded
+0 - Not excluded</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:all>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="OfferProviderName">
+										<xsd:annotation>
+											<xsd:documentation>PromotionHeader.OfferProviderName
+Allow distinguishing between different provider when sending reconciliation</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="100"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:all>
+						<xsd:attribute name="Id" type="xsd:string" use="required">
+							<xsd:annotation>
+								<xsd:documentation>From MP.RetailerCode WHERE TypeId = 0</xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+		<xsd:key name="HQL_Promotion_InterfaceKey1">
+			<xsd:selector xpath=".//Promotion"/>
+			<xsd:field xpath="@PromotionHeaderId"/>
+		</xsd:key>
+	</xsd:element>
+</xsd:schema>

@@ -1,0 +1,2071 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp2 (x64) (http://www.altova.com) by retalix (Retalix) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xsd:simpleType name="restrictedDate">
+		<xsd:restriction base="xsd:date">
+			<xsd:minInclusive value="1900-01-01"/>
+			<xsd:maxExclusive value="2056-12-31"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="restrictedDateTime">
+		<xsd:restriction base="xsd:dateTime">
+			<xsd:minInclusive value="1900-01-01T00:00:00.0Z"/>
+			<xsd:maxExclusive value="2056-12-31T00:00:00.0Z"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:element name="LoyaltyCustomer">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Retailer" maxOccurs="unbounded">
+					<xsd:annotation>
+						<xsd:documentation>Represents the Retailer Id which holds the members</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="HouseHold" minOccurs="0" maxOccurs="unbounded">
+								<xsd:annotation>
+									<xsd:documentation>
+										Represents the HouseHold entity.
+										HouseHold is the highest level entity of customer, holds members under it, that holds cards.
+										DB Table:
+										CRM_BuyingUnit table
+									</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:all>
+										<xsd:element name="Members" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													Represents the Member Entity - Under the HouseHold.
+													DB Table:
+													CRM_Member table
+												</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Member" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Single Member Details</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:all>
+																<xsd:element name="FamilyMembers" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>
+																			Family Members Details of The Member
+																			DB Table:
+																			CRM_MemberFamily
+																		</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="FamilyMember" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Single Family Member Details</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="FamilyMemberId" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								A Unique Id of the Family Member within this member.
+																								This Unique Id is used for updating data of specific family member.
+																								DB Field:
+																								CRM_.MemberFamily.FamilyMemberInternalKey
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:maxInclusive value="256"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="TypeId" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Family Member Type:
+																								(
+																								1 = Child;
+																								2 = Spouse;
+																								3 = Parent;
+																								4 = Relative;
+																								5 = GrandChild;
+																								6 = Other;
+																								)
+																								DB Field:
+																								CRM_.MemberFamily.TypeId
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="4"/>
+																								<xsd:enumeration value="5"/>
+																								<xsd:enumeration value="6"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="Name">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Family Member Name.
+																								DB Field:
+																								CRM_.MemberFamily.Name
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="30"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="BirthdayDate" type="restrictedDate">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Family Member Birth Date.
+																								* In case of Year of Birth use YYYY-01-01
+																								DB Field:
+																								CRM_.MemberFamily.BirthdayDate
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="Gender">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Family Member Gender:
+																								(
+																								1 = Male;
+																								2 = Female;
+																								)
+																								DB Field:
+																								CRM_.MemberFamily.Gender
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																				  <xsd:attribute name="Action">
+																				    <xsd:annotation>
+																				      <xsd:documentation>
+																				        Action
+																				      </xsd:documentation>
+																				    </xsd:annotation>
+																				    <xsd:simpleType>
+																				      <xsd:restriction base="xsd:string">
+																				        <xsd:maxLength value="1"/>
+																				        <xsd:enumeration value="D"/>
+																				      </xsd:restriction>
+																				    </xsd:simpleType>
+																				  </xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="MemberAdditionalAddress" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>
+																			Additional Address Details on Member Level.
+																			DB Table:
+																			CRM_MemberAdditionalAddress
+																		</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:attribute name="Country">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Represents the country of the Member.
+																					This attribute should contain an id of the country in HQL system from:
+																					(MP.Country.CountryId).
+																					DB Field:
+																					CRM_MemberAdditionalAddress.Country
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="20"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="State">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Represents the state of the Member.
+																					This attribute should contain an id of the state in HQL system from:
+																					(MP.State.StateId).
+																					DB Field: CRM_MemberAdditionalAddress.State
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="20"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="City">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Member's City - free text data.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.City
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="40"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Village">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Member's Village - free text data.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.Village
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="40"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Street1">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					First line of Member street details.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.Street1
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="400"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Street2">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Second line of Member street details.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.Street2
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="40"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="StreetNum">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Member street number (alphanumeric - supporting street numbers such as 10b, A21, etc.).
+																					DB Field:
+																					CRM_MemberAdditionalAddress.StreetNum
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="10"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="PostalCode">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Postal Code of the Member.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.PostalCode
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="10"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="POBox">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					P.O. Box of the Member
+																					DB Field:
+																					CRM_MemberAdditionalAddress.POBox
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="10"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="EMailAddress">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					EMail Address of the Member.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.EMailAddress
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="100"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Extension">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Member Address Extension.
+																					DB Field:
+																					CRM_MemberAdditionalAddress.Extension
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="30"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																		<xsd:attribute name="Remarks">
+																			<xsd:annotation>
+																				<xsd:documentation>
+																					Member Address Remarks,
+																					DB Field:
+																					CRM_MemberAdditionalAddress.Remarks
+																				</xsd:documentation>
+																			</xsd:annotation>
+																			<xsd:simpleType>
+																				<xsd:restriction base="xsd:string">
+																					<xsd:maxLength value="120"/>
+																				</xsd:restriction>
+																			</xsd:simpleType>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="Stores" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>
+																			Member Assignment to stores and indication of his home-store.
+																			DB Table:
+																			CRM_MemberStoreAssign
+																		</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="Store" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Single Member Store Assign</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="Id" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Store Id - References (MP.StoreCode.StoreId where TypeId = 0)
+																								DB Field:
+																								CRM_MemberStoreAssign.StoreInternalKey (Converted)
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="24"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="StoreTypeId">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Type of current store:
+																								(
+																								1 = Home Store;
+																								2 = First Transaction Store;
+																								3 = Most Visited / Preffered Store;
+																								)
+																								References (CRM_StoreType.StoreTypeId)
+																								* IF this attribute not supplied the store will be treated as Home Store.
+																								DB Field:
+																								CRM_MemberStoreAssign.StoreTypeId
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="IsHomeStore" type="xsd:boolean" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Indication for Member's Home Store.
+																								DB Field:
+																								CRM_MemberStoreAssign.IsHomeStore
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="Cards" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>
+																			Member's Cards details.
+																			DB Table:
+																			CRM_ClubCard
+																		</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="Card" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Single Card Details</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="Id" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Card Id - Should be unique within the entire club/retailer.
+																								DB Field:
+																								CRM_ClubCard.ClubCardId
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:string">
+																								<xsd:maxLength value="100"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="CardStatus" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Status of current card.
+																								The list below is the default of the system, but can be changed in the  configuration table according to the customer needs. 
+
+																								(
+																								1 = Active;
+																								2 = InActive;
+																								3 = Lost;
+																								4 = Opposed;
+																								5 = Cancelled;
+																								6 = Duplicated;
+																								7 = Closed;
+																								8 = Suspend;
+																								9 = Disabled;
+																								10 = Temporary;
+																								11 = ReadyForPrinting;
+																								12 = Linked)
+																								References CRM_RestrictionType.RestrictionId
+																								DB Field:
+																								CRM_ClubCard.RestrictionId
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																								<xsd:enumeration value="3"/>
+																								<xsd:enumeration value="4"/>
+																								<xsd:enumeration value="5"/>
+																								<xsd:enumeration value="6"/>
+																								<xsd:enumeration value="7"/>
+																								<xsd:enumeration value="8"/>
+																								<xsd:enumeration value="9"/>
+																								<xsd:enumeration value="10"/>
+																								<xsd:enumeration value="11"/>
+																								<xsd:enumeration value="12"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="IssueDate" type="restrictedDateTime" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Issuing Date of current card.
+																								DB Field:
+																								CRM_ClubCard.IssueDate
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="ExpirationDate" type="restrictedDateTime" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Expiration Date of cuurent card.
+																								DB Field:
+																								CRM_ClubCard.ExpirationDate
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="EffectiveDate" type="restrictedDateTime" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Effective Date of current card - the date when this card was first used.
+																								DB Field:
+																								CRM_ClubCard.EffectiveDate
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="MemberSegments" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>
+																			This element allows attaching, detaching or modifying segments on the Member Level.
+																			DB Table:
+																			CRM_MemberSegment
+																		</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="Segment" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Single Member Segment Details.</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="Id" type="xsd:int" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Represents the Id of the segment.
+																								Source Field in DB:
+																								CRM_Segment.SegmentId.
+																								Segments on this level should be configured without "Shared Segment" property (CRM_Segment.IsShared = 0).
+																								Destination Field:
+																								CRM_MemberSegment.SegmentInternalKey (Converted)
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="Status" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								Action to perform on current segment.
+																								In order to modify existing segment use "Attach".
+																								(
+																								1 = Attach;
+																								2 = Detach;
+																								)
+																							</xsd:documentation>
+																						</xsd:annotation>
+																						<xsd:simpleType>
+																							<xsd:restriction base="xsd:int">
+																								<xsd:enumeration value="1"/>
+																								<xsd:enumeration value="2"/>
+																							</xsd:restriction>
+																						</xsd:simpleType>
+																					</xsd:attribute>
+																					<xsd:attribute name="StartDate" type="restrictedDateTime" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Start Date of current segment for the current Member.
+																								The Member segment dates should be within the general segment range definition (Between CRM_Segment.StartDate AND CRM_Segment.EndDate).
+																								DB Field:
+																								CRM_MemberSegment.StartDate
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="EndDate" type="restrictedDateTime" use="optional">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The End Date of current segment for the current Member.
+																								The Member segment dates should be within the general segment range definition (Between CRM_Segment.StartDate AND CRM_Segment.EndDate).
+																								DB Field:
+																								CRM_MemberSegment.EndDate
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="MemberAttributes" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>
+																			Dynamic Attributes Values for Members.
+																			Used for any value that should be kept on the member level and is not part of HQL system.
+																			DB Table:
+																			CRM_MemberAttributeValue
+																		</xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:sequence>
+																			<xsd:element name="Attribute" maxOccurs="unbounded">
+																				<xsd:annotation>
+																					<xsd:documentation>Single Member Attribute Value</xsd:documentation>
+																				</xsd:annotation>
+																				<xsd:complexType>
+																					<xsd:attribute name="Id" type="xsd:int" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Dynamic Attribute Id.
+																								References (MP.EntityAttribute.AttributeId)
+																								DB Field:
+																								CRM_MemberAttributeValue.AttributeId
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																					<xsd:attribute name="Value" type="xsd:string" use="required">
+																						<xsd:annotation>
+																							<xsd:documentation>
+																								The Dynamic Attribute Value.
+																								DB Field:
+																								CRM_MemberAttributeValue:
+																								LongStringValue
+																								OR
+																								StringValue
+																								OR
+																								LongValue
+																								OR
+																								MoneyValue
+																								OR
+																								DoubleValue
+																								OR
+																								DateValue (YYYYMMDD)
+																								OR
+																								BooleanValue (0/1)
+																							</xsd:documentation>
+																						</xsd:annotation>
+																					</xsd:attribute>
+																				</xsd:complexType>
+																			</xsd:element>
+																		</xsd:sequence>
+																	</xsd:complexType>
+																</xsd:element>
+																<xsd:element name="SelfScan" minOccurs="0">
+																	<xsd:annotation>
+																		<xsd:documentation>CR 459073 </xsd:documentation>
+																	</xsd:annotation>
+																	<xsd:complexType>
+																		<xsd:attribute name="SelfScanEligibility" type="xsd:byte" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>Indication if member is eligible for Self-Scan</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="TrustLevel" type="xsd:int" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>MemberTrustLevel</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="RescansToPerform" type="xsd:short" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>No. of rescans perform from member's next visit</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="LastRescanDate" type="xsd:dateTime" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>Date of the member's last rescan</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																		<xsd:attribute name="TransCountFromRescan" type="xsd:short" use="optional">
+																			<xsd:annotation>
+																				<xsd:documentation>No. of executed transactions from member's last rescan</xsd:documentation>
+																			</xsd:annotation>
+																		</xsd:attribute>
+																	</xsd:complexType>
+																</xsd:element>
+															</xsd:all>
+															<xsd:attribute name="MemberExternalId" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		A unique Id of the Member in the original system.
+																		This id is kept in HQL db and helps identifying existing members.
+																		Existing id will be updated, new id is generating a new member.
+																		DB Field:
+																		CRM_Member.ExternalMemberKey
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:minLength value="1"/>
+																		<xsd:maxLength value="24"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="IsMainMember" type="xsd:boolean">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Indication for main member in the household, AKA "HouseHold Head".
+																		Only one member in each household may be the main member.
+																		DB Field:
+																		CRM_Member.IsMainMember
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="LastName">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Last Name of the member.
+																		DB Field:
+																		CRM_Member.LastName
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="FirstName">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		First Name of the member.
+																		DB Field:
+																		CRM_Member.FirstName
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MiddleInitial">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Middle Name Initial of the member.
+																		DB Field:
+																		CRM_Member.MiddleInitial
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="BirthDate" type="restrictedDate">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Birth Date of the member.
+																		DB Field:
+																		CRM_Member.BirthDate
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="DriversLicense">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Driver License Id of the member (alphanumeric).
+																		DB Field:
+																		CRM_Member.DriversLicense
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="20"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="NationalInsuranceNumber">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		National Insurance/Security Id of the member (alphanumeric).
+																		DB Field:
+																		CRM_Member.NationalInsuranceNumber
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="18"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Remarks">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Remarks on the member level.
+																		DB Field:
+																		CRM_Member.Remarks
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="256"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MobilePhoneNumber">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Mobile Phone Number of the member.
+																		DB Field:
+																		CRM_Member.MobilePhoneNumber
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="20"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="WorkPhoneNumber">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Work Phone Number of the member.
+																		DB Field:
+																		CRM_Member.WorkPhoneNumber
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="20"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Gender">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Gender of the member.
+																		(
+																		1 = Male;
+																		2 = Female
+																		)
+																		DB Field:
+																		CRM_Member.Gender
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Passport">
+																<xsd:annotation>
+																	<xsd:documentation>CRM_Member.Passport</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="25"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Title">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		CRM_Member.Title:
+																		(
+																		1 = Mr;
+																		2 = Ms;
+																		3 = Mrs;
+																		4 = Enterprise;
+																		5 = Miss;
+																		6 = Dr;
+																		7	= Prof;
+																		8	= Rev;
+																		9	= RtHon;
+																		10 = Sir;
+																		11 = Lady;
+																		12 = Mr/s;
+																		13 = Lord;
+																		14= MX;
+																		15= Capt;
+																		16= Dame;
+																		17=Advocate; 
+																		)
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																		<xsd:enumeration value="5"/>
+																		<xsd:enumeration value="6"/>
+																		<xsd:enumeration value="7"/>
+																		<xsd:enumeration value="8"/>
+																		<xsd:enumeration value="9"/>
+																		<xsd:enumeration value="10"/>
+																		<xsd:enumeration value="11"/>
+																		<xsd:enumeration value="12"/>
+																		<xsd:enumeration value="13"/>
+																		<xsd:enumeration value="14"/>
+																		<xsd:enumeration value="15"/>
+																		<xsd:enumeration value="16"/>
+																		<xsd:enumeration value="17"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="StartDate" type="restrictedDateTime">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Start Date of the member - creation date in the generating system.
+																		DB Field:
+																		CRM_Member.StartDate
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="EffectiveDate" type="restrictedDateTime">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Effective Date of the member - the date when the member first used one of his cards.
+																		DB Field:
+																		CRM_Member.EffectiveDate
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="RedemptionPrivileges" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>CRM_Member.RedemptionPrivileges (CRM_RedemptionPrivileges.PrivilegeId)</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="LanguageId" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Member's Language Id.
+																		References (MP.Language.LanguageId)
+																		DB Field:
+																		CRM_Member.LanguageId
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="PostOption" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Member Post Options.
+																		DB Field:
+																		CRM_Member.PostOption
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="NumberOfFamilyMembers" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Number of Family members of the member.
+																		This field is automatically calculated by the reported family members, but may be overridden if the actual number is greater than the reported family members.
+																		DB Field:
+																		CRM_Member.NumberOfFamilyMembers
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Anonimity" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Anonimity option - influences printing on the ticket at POS.
+																		DB Field:
+																		CRM_Member.Anonimity
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SpouseLastName">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Member's Spouse Last Name.
+																		DB Field:
+																		CRM_Member.LanguageId
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="30"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="MemberStatus" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		The Member Status accorting to (CRM_RestrictionType.RestrictionId - Where RestrictionType = 2)
+																		DB Field:
+																		CRM_Member.RestrictionId
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ReceiptLayoutId" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		The Member Preferred Ticket Layout.
+																		DB Field:
+																		CRM_Member.ReceiptLayoutId
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="AdressNormalizationUpdate">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		The Normalized Address Status.
+																		DB Field:
+																		CRM_Member.AdressNormalizationUpdate
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="1"/>
+																		<xsd:enumeration value="N"/>
+																		<xsd:enumeration value="E"/>
+																		<xsd:enumeration value="W"/>
+																		<xsd:enumeration value="S"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="UpdatedDate" type="restrictedDateTime" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		The date of last member update .
+
+																		DB Field:
+																		CRM_Member.UpdatedDate
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="AdditionalFirstName">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Additional First Name of the member.
+																		DB Field:
+																		CRM_Member.AdditionalFirstName
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="AdditionalLastName">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Additional Last Name of the member.
+																		DB Field:
+																		CRM_Member.AdditionalLastName
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CommercialDriversLicense">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Driver License Id of the member (alphanumeric).
+																		DB Field:
+																		CRM_Member.CommercialDriversLicense
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="20"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="CompanyName" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		The name of the company that the member works for (alphanumeric).
+																		DB Field:
+																		CRM_Member.CompanyName
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="30"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="EMailAddress">
+																<xsd:annotation>
+																	<xsd:documentation>EMail Address of the Member.				DB Field:			CRM_Member.EMailAddress</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="100"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+														  <xsd:attribute name="ReceiptType"  use="optional">
+														    <xsd:annotation>
+														      <xsd:documentation>
+														        CRM_Member.ReceiptType :
+														        0 = Printed receipt;
+														        1 = Digital receipt by e-mail;
+														      </xsd:documentation>
+														    </xsd:annotation>
+														    <xsd:simpleType>
+														      <xsd:restriction base="xsd:byte">
+														        <xsd:enumeration value="0"/>
+														        <xsd:enumeration value="1"/>
+														      </xsd:restriction>
+														    </xsd:simpleType>
+														  </xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="Accounts" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+													HouseHold Accounts Details.
+													This elements allows adding new accounts for HouseHold or modifying existing accounts.
+													Each account movement will be representet as an "Import" transaction with the details below.
+													DB Table:
+													CRM_BuyingUnitAccountsActivity
+												</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Account" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Single HouseHold Account Details</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="Id" type="xsd:int" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Represents the Id of the account that should be changed.
+																		Source Field in DB:
+																		CRM_AccumulatedAccounts.AccountId
+																		Destination Field:
+																		CRM_PosAccountsActivity.AccountInternalKey (Converted)
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="EarnValue" type="xsd:decimal">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Earned points to the current HouseHold account.
+																		DB Field:
+																		CRM_PosAccountsActivity.EarnValue
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="RedeemValue" type="xsd:decimal">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Redeemed points from the current HouseHold account.
+																		DB Field:
+																		CRM_PosAccountsActivity.RedeemValue
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="InitialValue">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Initial value to the current member account.
+																		Overrides the current value in the database.
+																		May be used for reset of the account with value = 0.
+																		If InitialValue is sent the new balance of this account will be:
+																		InitialValue + EarnValue - RedeemValue.
+																		DB Field:
+																		CRM_PosAccountsActivity.InitialValue
+																	</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:decimal">
+																		<xsd:minInclusive value="0"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="ExpirationDate" type="restrictedDateTime">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Expiration Date for the Earn Value in this transaction.
+																		This is relevant only if the account is configured with "Balance Expires" property (CRM_AccumulatedAccounts.BalanceExpires = 1).
+																		DB Field:
+																		CRM_PosAccountsActivity.ExpirationDate
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ReasonCode" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+																		Reason Code For Manual Points Update
+																		DB Field:
+																		CRM_POSTran/CRM_POSAccountsActivity.ReasonCode
+																	</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Remarks" type="xsd:string">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    Remarks For Manual Points Update
+                                    DB Field:
+                                    CRM_POSAccountsActivity.Remarks
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="ExternalReferenceId" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>External identifier for the account movement action - for customer use(not used by HQ)</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="StartDate" type="xsd:date" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    StartDate for the pending transaction activity   This is relevant only if the account is configured with "'Enable Earn Start Date" property to true
+                                    DB Field: CRM_PendingAccountsActivity.startDate
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											  <xsd:attribute name="TransactionStartDateTime" type="xsd:dateTime">
+											    <xsd:annotation>
+											      <xsd:documentation>In case 'CRM_ValidateMAAdjustmentDuplication_FromImport' system parameter value is On, attribute is mandatory. Otherwise, value is ignored.</xsd:documentation>
+											    </xsd:annotation>
+											  </xsd:attribute>
+											  <xsd:attribute name="TransactionId">
+											    <xsd:annotation>
+											      <xsd:documentation>In case 'CRM_ValidateMAAdjustmentDuplication_FromImport' system parameter value is On, attribute is mandatory. Otherwise, value is ignored.</xsd:documentation>
+											    </xsd:annotation>
+											    <xsd:simpleType>
+											      <xsd:restriction base="xsd:int">
+											        <xsd:minInclusive value="0"/>
+											      </xsd:restriction>
+											    </xsd:simpleType>
+											  </xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="HouseHoldSegments" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+                          This element allows attaching, detaching or modifying segments on the HouseHold Level.
+                          DB Table:
+                          CRM_BuyingUnitSegment
+                        </xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Segment" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Single HouseHold Segment Details</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="Id" type="xsd:int" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    Represents the Id of the segment.
+                                    Source Field in DB:
+                                    CRM_Segment.SegmentId.
+                                    Segments on this level should be configured with "Shared Segment" property (CRM_Segment.IsShared = 1).
+                                    Destination Field:
+                                    CRM_BuyingUnitSegment.SegmentInternalKey (Converted)
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Status" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    Action to perform on current segment.
+                                    In order to modify existing segment use "Attach".
+                                    (
+                                    1 = Attach;
+                                    2 = Detach;
+                                    )
+                                  </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="StartDate" type="restrictedDateTime" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    The Start Date of current segment for the current HouseHold.
+                                    The HouseHold segment dates should be within the general segment range definition (Between CRM_Segment.StartDate AND CRM_Segment.EndDate).
+                                    DB Field:
+                                    CRM_BuyingUnitSegment.StartDate
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="EndDate" type="restrictedDateTime" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    The End Date of current segment for the current HouseHold.
+                                    The HouseHold segment dates should be within the general segment range definition (Between CRM_Segment.StartDate AND CRM_Segment.EndDate).
+                                    DB Field:
+                                    CRM_BuyingUnitSegment.EndDate
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="RegisteredPromotions" minOccurs="0">
+											<xsd:complexType>
+												<xsd:choice>
+													<xsd:element name="RegisteredPromotion" maxOccurs="unbounded">
+														<xsd:complexType>
+															<xsd:attribute name="PromotionInternalKey" use="required"/>
+															<xsd:attribute name="Action" use="required">
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<!--
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		-->
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="RegistrationStartDate" type="restrictedDateTime" use="optional"/>
+															<xsd:attribute name="RegistrationEndDate" type="restrictedDateTime" use="optional"/>
+														</xsd:complexType>
+													</xsd:element>
+													<xsd:element name="ExternalRegisteredPromotion" maxOccurs="unbounded">
+														<xsd:complexType>
+															<xsd:attribute name="RegisteredPromotionExternal">
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:minLength value="1"/>
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Action" use="required">
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="0"/>
+																		<xsd:enumeration value="1"/>
+																		<!--
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		-->
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="RegistrationStartDate" type="restrictedDateTime" use="optional"/>
+															<xsd:attribute name="RegistrationEndDate" type="restrictedDateTime" use="optional"/>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:choice>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="Notes" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>Adding Notes through  Import Member</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Note" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Single Note</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="NoteDateTime" type="xsd:dateTime" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>Note Date Time on the external system. Represents the date time that the Note was added on the external system</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Note" use="required">
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="500"/>
+																		<xsd:minLength value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="SubTypeId" use="required"/>
+															<xsd:attribute name="ExternalUserName">
+																<xsd:annotation>
+																	<xsd:documentation>Allow to import the User Name that created the Note on the external system. Will be used as informative data only</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="24"/>
+																		<xsd:minLength value="1"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:all>
+									<xsd:attribute name="HouseHoldExternalId" use="required">
+										<xsd:annotation>
+											<xsd:documentation>
+                        A unique Id of the HouseHold in the original system.
+                        This id is kept in HQL db and helps identifying existing households.
+                        Existing id will be updated, new id is generating a new household.
+                        DB Field:
+                        CRM_BuyingUnit.ExternalBuyingUnit
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="1"/>
+												<xsd:maxLength value="50"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="Country">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Represents the country of the HouseHold.
+                        This attribute should contain an id of the country in HQL system from:
+                        MP.Country.CountryId.
+                        DB Field: CRM_BuyingUnit.Country
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="State">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Represents the state of the HouseHold.
+                        This attribute should contain an id of the state in HQL system from:
+                        MP.State.StateId.
+                        DB Field:
+                        CRM_BuyingUnit.State
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="City">
+										<xsd:annotation>
+											<xsd:documentation>
+                        HouseHold City - free text value.
+                        DB Field:
+                        CRM_BuyingUnit.City
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="30"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="Street1">
+										<xsd:annotation>
+											<xsd:documentation>
+                        First line of HouseHold street details.
+                        DB Field:
+                        CRM_BuyingUnit.Street1
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="40"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="Street2">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Second line of HouseHold street details.
+                        DB Field:
+                        CRM_BuyingUnit.Street2
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="400"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="AddressKana">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Address line of HouseHold supporting special Japanese characters.
+                        DB Field:
+                        CRM_BuyingUnit.AddressKana
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="400"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="StreetNum">
+										<xsd:annotation>
+											<xsd:documentation>
+                        HouseHold street number (alphanumeric - supporting street numbers such as 10b, A21, etc.).
+                        DB Field:
+                        CRM_BuyingUnit.StreetNum
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="PostalCode">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Postal Code of the HouseHold.
+                        DB field:
+                        CRM_BuyingUnit.PostalCode
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="POBox">
+										<xsd:annotation>
+											<xsd:documentation>
+                        P.O. Box of the HouseHold
+                        DB Field:
+                        CRM_BuyingUnit.POBox
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="PhonePrefix">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Prefix of HouseHold Home Phone.
+                        DB Field:
+                        CRM_BuyingUnit.PhonePrefix
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="HomePhone">
+										<xsd:annotation>
+											<xsd:documentation>
+                        HouseHold Home Phone.
+                        DB field:
+                        CRM_BuyingUnit.HomePhone
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="EMailAddress">
+										<xsd:annotation>
+											<xsd:documentation>
+                        HouseHold EMail Address.
+                        DB Field:
+                        CRM_BuyingUnit.EMailAddress
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="100"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="SendEmail" type="xsd:boolean">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Indication for Email notification for the HouseHold (Yes/No).
+                        DB Field:
+                        CRM_BuyingUnit.SendEmail
+                      </xsd:documentation>
+										</xsd:annotation>
+									</xsd:attribute>
+									<xsd:attribute name="Remarks">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Remarks on the HouseHold Level.
+                        DB Field:
+                        CRM_BuyingUnit.Remarks
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="120"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="Extension" type="xsd:string" use="optional">
+										<xsd:annotation>
+											<xsd:documentation>
+                        Extension on the HouseHold Level.
+                        DB Field:
+                        CRM_BuyingUnit.Extension
+                      </xsd:documentation>
+										</xsd:annotation>
+									</xsd:attribute>
+									<xsd:attribute name="County">
+										<xsd:annotation>
+											<xsd:documentation>
+                        County on the HouseHold Level.
+                        DB Field:
+                        CRM_BuyingUnit.County
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="40"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="HouseName">
+										<xsd:annotation>
+											<xsd:documentation>
+                        HouseName on the HouseHold Level.
+                        DB Field:
+                        CRM_BuyingUnit.HouseName
+                      </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="40"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Legend" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Definition of new Segments and Member Accounts.</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:all>
+										<xsd:element name="Segments" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+                          Definition of new Segments.
+                          DB Table:
+                          CRM_Segment
+                        </xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="Segment" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Single Segment Details</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="SegmentId" type="xsd:int" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Segment Unique Id.
+                                    DB Field:
+                                    CRM_Segment.SegmentId
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SegmentDescription">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Segment Description.
+                                    If not supplied will be created as "Segment" +SegmentId.
+                                    DB Field:
+                                    CRM_Segment.SegmentDescription
+                                  </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="50"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Type" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Segment Type.
+                                    If not supplied will be the default value saved in System Parameter "CRM_DefaultSegmentType".
+                                    References (CRM_Segment_Types.Type)
+                                    DB Field:
+                                    CRM_Segment.Type
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="SubTypeId" type="xsd:int">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Segment Sub Type.
+                                    If not supplied will be the default value saved in System Parameter "CRM_DefaultSegmentSubType".
+                                    References (CRM_Segment_SubTypes.SubTypeId)
+                                    DB Field:
+                                    CRM_Segment.SubTypeId
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="IsShared" type="xsd:boolean">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    Indication for Shared Segment - A Segment on HouseHold Level.
+                                    If not supplied will be the default value saved in System Parameter "CRM_DefaultSegmentIsShared".
+                                    DB Field:
+                                    CRM_Segment.IsShared
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="StartDate" type="restrictedDateTime" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    Start Date (Activation) of the New Segment.
+                                    DB Field:
+                                    CRM_Segment.StartDate
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="EndDate" type="restrictedDateTime" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    End Date (Deactivation) of the New Segment.
+                                    DB Field:
+                                    CRM_Segment.EndDate
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="Action" use="optional">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    The value in the attribute Action indicates  if the segment should be attached or detached from all members\households (according to the segment level: Shared or Private) that exist in the database for the relevant retailer.
+                                    Possible values:
+                                    1 - Attach
+                                    2 - Detach
+                                    This functionality supported only Customers the sysparameter "CRM_ImportMembersAttachDetachTimingExecution" defined as "1" for.
+                                  </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="UploadInTransactionsSummary" type="xsd:boolean">
+																<xsd:annotation>
+																	<xsd:documentation>This column will host the information regarding uploading the segment as part of MSG5\daily trans to ATD\DATD: true – upload, false – don't upload. If the segment type is "targeted", we override this value to be false. This value is stored at CRM_Segments.UploadInTransactionsSummary.</xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="MemberAccounts" minOccurs="0">
+											<xsd:annotation>
+												<xsd:documentation>
+                          Definition of new Member Accounts.
+                          DB Table:
+                          CRM_AccumulatedAccounts
+                        </xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="MemberAccount" maxOccurs="unbounded">
+														<xsd:annotation>
+															<xsd:documentation>Single Member Account Details</xsd:documentation>
+														</xsd:annotation>
+														<xsd:complexType>
+															<xsd:attribute name="AccountId" type="xsd:int" use="required">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Member Account Unique Id.
+                                    DB Field:
+                                    CRM_AccumulatedAccounts.AccountId
+                                  </xsd:documentation>
+																</xsd:annotation>
+															</xsd:attribute>
+															<xsd:attribute name="AccountName">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Member Account Description.
+                                    If not supplied will be created as "Account" +AccountId.
+                                    DB Field:
+                                    CRM_AccumulatedAccounts.Name
+                                  </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:maxLength value="100"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="Type">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Member Account Type.
+                                    If not supplied will be the default value saved in System Parameter "CRM_DefaultAccountType".
+                                    References (CRM_Account_Types.Type)
+                                    DB Field:
+                                    CRM_AccumulatedAccounts.Type
+                                  </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																		<xsd:enumeration value="4"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+															<xsd:attribute name="BalanceType">
+																<xsd:annotation>
+																	<xsd:documentation>
+                                    New Member Account Balance Type:
+                                    (
+                                    1 - Points;
+                                    2 - Currency;
+                                    3 - Counter;
+                                    )
+                                    If not supplied will be the default value saved in System Parameter "CRM_DefaultAccountBalanceType".
+                                    DB Field:
+                                    CRM_AccumulatedAccounts.BalanceType
+                                  </xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:int">
+																		<xsd:enumeration value="1"/>
+																		<xsd:enumeration value="2"/>
+																		<xsd:enumeration value="3"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:attribute>
+														  <xsd:attribute name="DeactivationScope"  use="optional">
+														    <xsd:annotation>
+														      <xsd:documentation>
+														        DeactivationScop 
+                                    0 - Never
+                                    1 - On Selected Date
+                                  </xsd:documentation>
+														    </xsd:annotation>
+														    <xsd:simpleType>
+														      <xsd:restriction base="xsd:int">
+														        <xsd:enumeration value="0"/>
+														        <xsd:enumeration value="1"/>
+														        </xsd:restriction>
+														    </xsd:simpleType>
+														  </xsd:attribute>
+														  <xsd:attribute name="DeactivationDueDate" type="restrictedDateTime" use="optional">
+														    <xsd:annotation>
+														      <xsd:documentation>
+														        Deactivation Due Date  - the batch manager will deactivate the account on the due date. 
+                                  </xsd:documentation>
+														    </xsd:annotation>
+														  </xsd:attribute>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:all>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="HouseHoldMovements" minOccurs="0">
+								<xsd:annotation>
+									<xsd:documentation>Enables Movement of existing members from one HouseHold to Another OR merging of two members within the same HouseHold into one member OR connecting/disconnecting HouseHolds to Virtual HouseHold .</xsd:documentation>
+								</xsd:annotation>
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="MemberMerge" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>Single Member Movement Details</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:attribute name="SourceMemberExternalId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>
+                              The Source Member Unique Id.
+                              Must be within the same HouseHold of DestinationMemberExternalId.
+                              DB Field:
+                              CRM_Member.ExternalMemberKey
+                            </xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="24"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="DestinationMemberExternalId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>
+                              The Destination Member Unique Id.
+                              Must be within the same HouseHold of SourceMemberExternalId.
+                              DB Field:
+                              CRM_Member.ExternalMemberKey
+                            </xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="24"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="HouseHoldMerge" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>Single HouseHold Movement Details</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:attribute name="SourceHouseHoldExternalId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>
+                              The Source HouseHold Unique Id.
+                              Must be different from DestinationHouseHoldExternalId.
+                              Must have single member in it.
+                              DB Field:
+                              CRM_BuyingUnit.ExternalBuyingUnit
+                            </xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="50"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="DestinationHouseHoldExternalId" use="required">
+													<xsd:annotation>
+														<xsd:documentation>
+                              The Destination HouseHold Unique Id.
+                              Must be different from SourceHouseHoldExternalId.
+                              DB Field:
+                              CRM_BuyingUnit.ExternalBuyingUnit
+                            </xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="50"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="VirtualHHMerge" minOccurs="0" maxOccurs="unbounded">
+											<xsd:annotation>
+												<xsd:documentation>Single Virtual HouseHold Movement Details</xsd:documentation>
+											</xsd:annotation>
+											<xsd:complexType>
+												<xsd:attribute name="HouseHoldExternalId" use="required">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="50"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="VirtualHHExternalId" use="required">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="50"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="IdentifierUnlink" minOccurs="0" maxOccurs="unbounded">
+											<xsd:complexType>
+												<xsd:attribute name="MemberExternalId" use="required">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="24"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="ExistingIdentifier" use="required">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="100"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+												<xsd:attribute name="DeletedIdentifier" use="required">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="100"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:attribute>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+						<xsd:attribute name="Id" type="xsd:string" use="required">
+							<xsd:annotation>
+								<xsd:documentation>
+                  Represents the Retailer Id which hold the members.
+                  References
+                  (MP.RetailerCode.RetailersList - Where TypeId = 0)
+                </xsd:documentation>
+							</xsd:annotation>
+						</xsd:attribute>
+					  <xsd:attribute name="ClubId" type="xsd:int">
+					    <xsd:annotation>
+					      <xsd:documentation>
+					        Used only when RetailerId = 0
+					      </xsd:documentation>
+					    </xsd:annotation>
+					  </xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="Action" use="required">
+				<xsd:annotation>
+					<xsd:documentation>
+            General file purpose.
+            (
+            "I" = Import;
+            "E" = Export;
+            )
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="1"/>
+						<xsd:enumeration value="I"/>
+						<xsd:enumeration value="E"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+			<xsd:attribute name="SystemSource" use="optional">
+				<xsd:annotation>
+					<xsd:documentation>
+            Represents the system source that initated the customers import related to this retailer.
+          </xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="50"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:attribute>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

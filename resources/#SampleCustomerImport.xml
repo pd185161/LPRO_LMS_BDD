@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LoyaltyCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Action="I" SystemSource="a" xsi:noNamespaceSchemaLocation="HQL_Customer_Interface.xsd">
+	<Retailer Id="String" ClubId="0">
+		<HouseHold HouseHoldExternalId="a" Country="a" State="a" City="a" Street1="a" StreetNum="a" PostalCode="" POBox="1234" HomePhone="7742490389" EMailAddress="a" Remarks="Automation" Extension="10">
+			<Members>
+				<Member BirthDate="1990-01-01" DriversLicense="DL323423" EMailAddress="pk@gmail.com" FirstName="Esther_K" Gender="1" IsMainMember="true" LastName="Test" MemberExternalId="1001000025" MemberStatus="1" MobilePhoneNumber="992172" Remarks="KT to Esther" WorkPhoneNumber="24324">
+					<FamilyMembers>
+						<FamilyMember FamilyMemberId="256" TypeId="5" Name="a" BirthdayDate="1900-01-01" Gender="2" Action="D"/>
+					</FamilyMembers>
+					<Stores>
+						<Store Id="a" StoreTypeId="2" IsHomeStore="true"/>
+					</Stores>
+					<Cards>
+						<Card Id="a" CardStatus="9" IssueDate="1900-01-01T00:00:00Z" ExpirationDate="1900-01-01T00:00:00Z" EffectiveDate="1900-01-01T00:00:00Z"/>
+					</Cards>
+					<MemberSegments>
+						<Segment Id="0" Status="2" StartDate="1900-01-01T00:00:00Z" EndDate="1900-01-01T00:00:00Z"/>
+					</MemberSegments>
+					<MemberAttributes>
+						<Attribute Id="0" Value="String"/>
+					</MemberAttributes>
+				</Member>
+			</Members>
+			<Accounts>
+				<Account Id="0" EarnValue="0" RedeemValue="0" InitialValue="0" ExpirationDate="1900-01-01T00:00:00Z" ReasonCode="0" Remarks="String" ExternalReferenceId="a" StartDate="1957-08-13"/>
+			</Accounts>
+			<HouseHoldSegments>
+				<Segment Id="0" Status="1" StartDate="1900-01-01T00:00:00Z" EndDate="1900-01-01T00:00:00Z"/>
+			</HouseHoldSegments>
+			<RegisteredPromotions>
+				<RegisteredPromotion PromotionInternalKey="text" Action="1" RegistrationStartDate="1900-01-01T00:00:00Z" RegistrationEndDate="1900-01-01T00:00:00Z"/>
+			</RegisteredPromotions>
+			<Notes>
+				<Note NoteDateTime="2001-12-17T09:30:47Z" Note="a" SubTypeId="text" ExternalUserName="a"/>
+			</Notes>
+		</HouseHold>
+	</Retailer>
+</LoyaltyCustomer>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2023-05-05T10:34:40.944920500Z</date>
+  <millis>1683282880944</millis>
+  <nanos>920500</nanos>
+  <sequence>0</sequence>
+  <logger>com.javacodegeeks.snippets.core</logger>
+  <level>SEVERE</level>
+  <class>com.LMS.LMSAPIAutomation.ReadCMD</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>severe message</message>
+</record>
+<record>
+  <date>2023-05-05T10:34:41.940258400Z</date>
+  <millis>1683282881940</millis>
+  <nanos>258400</nanos>
+  <sequence>1</sequence>
+  <logger>com.javacodegeeks.snippets.core</logger>
+  <level>WARNING</level>
+  <class>com.LMS.LMSAPIAutomation.ReadCMD</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>warning message</message>
+</record>
+<record>
+  <date>2023-05-05T10:34:44.189697400Z</date>
+  <millis>1683282884189</millis>
+  <nanos>697400</nanos>
+  <sequence>2</sequence>
+  <logger>com.javacodegeeks.snippets.core</logger>
+  <level>INFO</level>
+  <class>com.LMS.LMSAPIAutomation.ReadCMD</class>
+  <method>main</method>
+  <thread>1</thread>
+  <message>info message</message>
+</record>
+</log>
